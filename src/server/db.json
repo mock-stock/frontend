@@ -1,0 +1,27 @@
+{
+  "history": [
+    { "fid": 1, "search_keyword": "삼성전자" },
+    { "fid": 2, "search_keyword": "삼성전기" },
+    { "fid": 3, "search_keyword": "삼성" }
+  ],
+  "keyword": [
+    {
+      "sid": 2,
+      "stck_name": "LG전자",
+      "stck_code": "12345",
+      "is_watched": false
+    },
+    {
+      "sid": 3,
+      "stck_name": "삼성전자",
+      "stck_code": "12345",
+      "is_watched": true
+    },
+    {
+      "sid": 4,
+      "stck_name": "전기",
+      "stck_code": "12345",
+      "is_watched": true
+    }
+  ]
+}

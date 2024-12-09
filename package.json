@@ -3,22 +3,26 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "server": "json-server src/server/db.json --port 5001",
+    "client": "next dev",
+    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "instal": "^0.0.1-security",
+    "next": "14.2.19",
     "react": "^18",
-    "react-dom": "^18",
-    "next": "14.2.19"
+    "react-dom": "^18"
   },
   "devDependencies": {
-    "typescript": "^5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
-    "eslint-config-next": "14.2.19"
+    "eslint-config-next": "14.2.19",
+    "json-server": "^1.0.0-beta.3",
+    "typescript": "^5"
   }
 }
