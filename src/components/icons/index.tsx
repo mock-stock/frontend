@@ -1,0 +1,63 @@
+import Link from "next/link";
+import { Search, ChevronLeft, WatchStar, Close, Pay } from "./icons";
+
+const components = {
+  search: Search,
+  chevronLeft: ChevronLeft,
+  watchStar: WatchStar,
+  close: Close,
+  pay: Pay,
+};
+
+type IconProps = {
+  kind: keyof typeof components;
+  href?: string | undefined;
+  size?: number;
+  fill?: string;
+  onClick?: () => void;
+};
+
+const iconReaderStyle: React.CSSProperties = {
+  position: "absolute",
+  width: "1px",
+  height: "1px",
+  margin: "-1px",
+  padding: 0,
+  overflow: "hidden",
+  clip: "rect(0, 0, 0, 0)",
+  border: 0,
+  whiteSpace: "nowrap",
+};
+
+const Icons = ({
+  kind,
+  href,
+  size = 24,
+  fill = "none",
+  onClick,
+}: IconProps) => {
+  const SvgComponent = components[kind];
+
+  const svgStyle = {
+    width: `${size}px`,
+    height: `${size}px`,
+    fill: fill,
+  };
+
+  if (!href)
+    return (
+      <div onClick={onClick}>
+        <p style={{ ...iconReaderStyle }}>{kind}</p>
+        <SvgComponent style={svgStyle} />
+      </div>
+    );
+
+  return (
+    <Link href={href}>
+      <span style={{ ...iconReaderStyle }}>{kind} ddd</span>
+      <SvgComponent style={svgStyle} />
+    </Link>
+  );
+};
+
+export default Icons;
