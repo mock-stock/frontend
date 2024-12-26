@@ -41,7 +41,7 @@ export function ChevronLeft(svgProps: SVGProps<SVGSVGElement>) {
       {...svgProps}
     >
       <g>
-        <path d="M15 6L9 12L15 18" stroke="#2D3748" />
+        <path d="M15 6L9 12L15 18" stroke="#2D3748" strokeWidth="2" />
       </g>
     </svg>
   );
