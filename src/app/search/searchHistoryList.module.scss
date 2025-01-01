@@ -1,0 +1,25 @@
+.historyList-wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+}
+
+.history-item {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.item-content {
+  display: flex;
+  align-items: center;
+  background-color: #edf2f7;
+  padding: 8px;
+  border-radius: 10px;
+}
+
+.item-title {
+  margin-right: 10px;
+  height: 24px;
+  font-size: 16px;
+  line-height: 27px;
+}

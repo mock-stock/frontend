@@ -1,4 +1,4 @@
-import SearchHeader from "./components/searchHeader/searchHeader";
+import SearchHeader from "./searchHeader";
 
 interface SearchLayoutProps {
   children: React.ReactNode;

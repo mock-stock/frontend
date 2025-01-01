@@ -1,25 +1,25 @@
 "use client";
-import { usePathname, useRouter } from "next/navigation";
-
+import { useRouter, useSearchParams } from "next/navigation";
 import Icons from "@/components/icons";
-
 import style from "./searchHeader.module.scss";
+import { useEffect, useState } from "react";
 
 export default function SearchHeader() {
   const router = useRouter();
-  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const initialSearch = searchParams.get("search_query") || "";
+  const [inputValue, setInputValue] = useState(initialSearch);
+
+  useEffect(() => {
+    setInputValue(initialSearch);
+  }, [initialSearch]);
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-
-    const form = e.currentTarget;
-    const formData = new FormData(form);
-    const keyword = formData.get("keyword") as string;
-
-    const url = `${pathname}?keyword=${encodeURIComponent(keyword)}`;
-
+    const keyword = inputValue.trim();
+    const url = `/search/result?search_query=${keyword}`;
     if (keyword) {
-      router.push(`${url}`);
+      router.replace(`${url}`);
     }
   }
 
@@ -40,8 +40,11 @@ export default function SearchHeader() {
           id="keyword"
           name="keyword"
           type="text"
+          value={inputValue}
           placeholder="종목을 검색해보세요"
           className={style["search-input"]}
+          onChange={(e) => setInputValue(e.target.value)}
+          aria-label="검색어 입력"
         />
       </form>
     </header>
