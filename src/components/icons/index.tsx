@@ -43,10 +43,18 @@ const Icons = ({
     height: `${size}px`,
     fill: fill,
   };
+  const svgBoxStyle = {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    height: `${size}px`,
+    width: `${size}px`,
+  } as const;
 
   if (!href)
     return (
-      <div onClick={onClick}>
+      <div onClick={onClick} style={svgBoxStyle}>
         <p style={{ ...iconReaderStyle }}>{kind}</p>
         <SvgComponent style={svgStyle} />
       </div>

@@ -72,7 +72,7 @@ export function Close(svgProps: SVGProps<SVGSVGElement>) {
       {...svgProps}
     >
       <path
-        d="M1 1L11 11M1 11L11 1"
+        d="M6 6L18 18M6 18L18 6"
         stroke="#2D3748"
         strokeWidth="2"
         strokeLinecap="round"
