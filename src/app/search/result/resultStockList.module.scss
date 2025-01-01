@@ -1,0 +1,25 @@
+.stockList-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.stock-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 12px 0;
+}
+
+.stock-link {
+  flex: 1;
+  text-decoration: none;
+}
+.stock-title {
+  padding-bottom: 4px;
+  color: #0d0d12;
+  font-size: 14px;
+}
+.stock-symbol {
+  font-size: 12px;
+  color: #9b9da0;
+}

@@ -1,0 +1,21 @@
+@use "@/styles/sizes";
+
+.stockList-container {
+  margin: 20px sizes.$mobile-space-base;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.no-results {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+  color: #9b9da0;
+  span {
+    color: #3180f2;
+  }
+}
