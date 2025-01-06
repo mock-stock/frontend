@@ -1,4 +1,4 @@
-import { getKeywordStock } from "@/api/keyword";
+import { getStock } from "@/api/stock";
 
 import style from "./result.module.scss";
 import ResultStockList from "./resultStockList";
@@ -17,7 +17,7 @@ export default async function Page(props: {
   const searchParams = await props.searchParams;
   const search = searchParams.search_query ?? "";
 
-  const data: StockData[] = search && (await getKeywordStock(search));
+  const data: StockData[] = search && (await getStock(search));
 
   return (
     <>

@@ -1,6 +1,7 @@
-//주식 정보 조회
-export async function getStock(stck_code: string) {
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/stock/${stck_code}`;
+export async function getStock(keyword: string) {
+  // const url = `http://localhost:5001/keyword`;
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/stocks/search/${keyword}`;
+
   try {
     const response = await fetch(url);
 
@@ -18,7 +19,6 @@ export async function getStock(stck_code: string) {
   }
 }
 
-// 관심상품 등록
 export async function postStock(sid: number) {
   const url = `http://localhost:5001/watchlist/${sid}`;
 
@@ -31,7 +31,6 @@ export async function postStock(sid: number) {
     );
   }
 }
-// 관심상품 삭제
 export async function deleteStock(sid: number) {
   const url = `http://localhost:5001/watchlist/${sid}`;
   const response = await fetch(url, { method: "DELETE" });
