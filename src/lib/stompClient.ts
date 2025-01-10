@@ -1,7 +1,7 @@
 import { Client, IFrame, IMessage, StompSubscription } from "@stomp/stompjs";
 import SockJS from "sockjs-client";
 import { SOCKET_URL } from "@/lib/utils/paths"; // 소켓 URL을 가져옵니다.
-import { StockData } from "./page";
+import { StockData } from "@/app/stock/[stockCode]/page";
 
 export interface PublishMessage {
   action: string;
