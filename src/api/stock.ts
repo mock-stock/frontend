@@ -1,6 +1,6 @@
-export async function getStock(keyword: string) {
-  // const url = `http://localhost:5001/keyword`;
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/stocks/search/${keyword}`;
+// 종목 정보
+export async function getStock(stockCode: string) {
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/stock/${stockCode}`;
 
   try {
     const response = await fetch(url);
@@ -19,6 +19,7 @@ export async function getStock(keyword: string) {
   }
 }
 
+// 종목 즐겨찾기 추가
 export async function postStock(sid: number) {
   const url = `http://localhost:5001/watchlist/${sid}`;
 
@@ -31,6 +32,7 @@ export async function postStock(sid: number) {
     );
   }
 }
+// 종목 즐겨찾기 삭제
 export async function deleteStock(sid: number) {
   const url = `http://localhost:5001/watchlist/${sid}`;
   const response = await fetch(url, { method: "DELETE" });

@@ -1,3 +1,4 @@
+// 검색기록 조회
 export async function getHistory() {
   const url = `http://localhost:5001/history`;
   try {
@@ -16,6 +17,7 @@ export async function getHistory() {
     throw error;
   }
 }
+// 검색기록 삭제
 export async function deleteHistory(fid: number) {
   const url = `http://localhost:5001/search/history/${fid}`;
 

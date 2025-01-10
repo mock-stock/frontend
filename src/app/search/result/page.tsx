@@ -1,8 +1,7 @@
-import { getStock } from "@/api/stock";
-
 import style from "./result.module.scss";
 import ResultStockList from "./resultStockList";
 import { Suspense } from "react";
+import { getKeywordStock } from "@/api/keyword";
 
 export interface StockData {
   sid: number;
@@ -17,7 +16,7 @@ export default async function Page(props: {
   const searchParams = await props.searchParams;
   const search = searchParams.search_query ?? "";
 
-  const data: StockData[] = search && (await getStock(search));
+  const data: StockData[] = search && (await getKeywordStock(search));
 
   return (
     <>

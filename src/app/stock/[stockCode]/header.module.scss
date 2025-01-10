@@ -1,0 +1,20 @@
+@use "@/styles/sizes";
+
+$content_sixe: 40px;
+
+.header-container {
+  height: 48px;
+  margin: 0 sizes.$mobile-space-base;
+  display: flex;
+  align-items: center;
+}
+
+.back-icon-box {
+  width: $content_sixe;
+  height: $content_sixe;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #edf2f7;
+  border-radius: 10px;
+}
