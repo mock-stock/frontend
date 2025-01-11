@@ -9,15 +9,19 @@ export interface HistoryData {
   search_keyword: string;
 }
 
-export default async function Page() {
+async function fetchHistory() {
   const session = await getServerToken();
-  const data: HistoryData[] = session && (await getHistory());
+  return session ? await getHistory() : [];
+}
+
+export default async function Page() {
+  const data: HistoryData[] = await fetchHistory();
 
   return (
     <div className={style["historyList-container"]}>
-      {session && <h1 className={style["title"]}>검색 기록</h1>}
+      {data.length && <h1 className={style["title"]}>검색 기록</h1>}
       <Suspense fallback={<p>Loading...</p>}>
-        {data && <SearchHistoryList historyList={data} />}
+        {data.length && <SearchHistoryList historyList={data} />}
       </Suspense>
     </div>
   );
