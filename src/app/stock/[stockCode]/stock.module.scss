@@ -3,3 +3,26 @@
 .stockInfo-container {
   margin: 20px sizes.$mobile-space-base;
 }
+
+//탭메뉴
+.tab-container {
+  display: flex;
+  padding: 0 sizes.$mobile-space-base;
+}
+
+.bar {
+  border-bottom: 2px solid #dfe1e7;
+  width: 100%;
+}
+
+.tab {
+  padding: 10px 15px;
+  white-space: nowrap;
+  color: #5a5d5f;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.tab.active {
+  border-bottom: 2px solid #5a5d5f; //활성 탭:하단 경계선
+}

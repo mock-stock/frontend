@@ -1,11 +1,14 @@
 "use client";
 import { useEffect, useState } from "react";
-import { WS_PATHS } from "@/lib/utils/paths";
-import { getStock } from "@/api/stock";
+import style from "./stock.module.scss";
+import { usePathname, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
+
 import Header from "./header";
 import StockInfo from "./stockInfo";
-import { connectSocket } from "@/lib/stompClient";
-import style from "./stock.module.scss";
+import StockChart from "./stockChart";
+import MyInvestmentInfo from "./myInvestments";
+import { useStocksInfoSoket } from "./hooks/useStocks";
 
 export interface StockData {
   sid: number; //고유 식별자
@@ -20,33 +23,65 @@ interface Params {
   params: { stockCode: string };
 }
 
+interface Tab {
+  label: string;
+  name: string;
+  content: (stockCode: string) => JSX.Element;
+}
+
+const tabs: Tab[] = [
+  {
+    label: "chart",
+    name: "차트",
+    content: () => <StockChart />,
+  },
+  {
+    label: "myInvestments",
+    name: "내주식",
+    content: (stockCode) => <MyInvestmentInfo stockCode={stockCode} />,
+  },
+];
+
 export default function Page({ params: { stockCode } }: Params) {
-  const [stockData, setStockData] = useState<StockData | null>(null);
+  const { data } = useStocksInfoSoket(stockCode);
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const search = searchParams.get("label");
+
+  const [activeTab, setActiveTab] = useState<string>("chart");
+
   useEffect(() => {
-    const fetchStockData = async () => {
-      const data = await getStock(stockCode);
-      setStockData(data);
-    };
-    fetchStockData();
+    setActiveTab(search ?? tabs[0].label);
+  }, [search]);
 
-    // 소켓 연결
-    const { unsubscribe } = connectSocket(
-      WS_PATHS.SUB_ENDPOINT(stockCode),
-      WS_PATHS.PUB_ENDPOINT,
-      { action: "SUBSCRIBE", ids: [stockCode] },
-      (data) => setStockData(data)
-    );
-
-    return () => {
-      unsubscribe();
-    };
-  }, [stockCode]);
+  const handleTabClick = (label: string) => {
+    setActiveTab(label);
+    router.replace(`${pathname}?label=${label}`);
+  };
 
   return (
     <div>
       <Header />
       <div className={style["stockInfo-container"]}>
-        <StockInfo stockData={stockData} />
+        <StockInfo stockData={data} />
+      </div>
+      <div className={style["tab-container"]}>
+        {tabs.map((tab, index) => (
+          <div
+            key={index}
+            className={`${style.tab} ${
+              activeTab === tab.label ? style.active : ""
+            }`}
+            onClick={() => handleTabClick(tab.label)}
+          >
+            {tab.name}
+          </div>
+        ))}
+      </div>
+      <hr className="bar" />
+      <div className={style["tab-content"]}>
+        {tabs.find((tab) => tab.label === activeTab)?.content(stockCode)}
       </div>
     </div>
   );
