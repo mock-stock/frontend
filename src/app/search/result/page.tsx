@@ -2,6 +2,7 @@ import style from "./result.module.scss";
 import ResultStockList from "./resultStockList";
 import { Suspense } from "react";
 import { getKeywordStock } from "@/api/keyword";
+import SearchHeader from "../searchHeader";
 
 export interface StockData {
   sid: number;
@@ -20,9 +21,10 @@ export default async function Page(props: {
 
   return (
     <>
-      <div className={style["stockList-container"]}>
-        <h2 className={style["title"]}>주식</h2>
-        <Suspense fallback={<p>Loading...</p>}>
+      <Suspense fallback={<p>Loading...</p>}>
+        <SearchHeader />
+        <div className={style["stockList-container"]}>
+          <h2 className={style["title"]}>주식</h2>
           {data.length > 0 ? (
             <ResultStockList stockList={data} />
           ) : (
@@ -30,8 +32,8 @@ export default async function Page(props: {
               <span>&quot;{search}&quot;</span>에 대한 검색결과가 없어요.
             </p>
           )}
-        </Suspense>
-      </div>
+        </div>
+      </Suspense>
     </>
   );
 }

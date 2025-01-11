@@ -1,5 +1,3 @@
-import SearchHeader from "./searchHeader";
-
 interface SearchLayoutProps {
   children: React.ReactNode;
 }
@@ -7,7 +5,6 @@ interface SearchLayoutProps {
 export default function SearchLayout({ children }: SearchLayoutProps) {
   return (
     <div>
-      <SearchHeader />
       <main>{children}</main>
     </div>
   );
