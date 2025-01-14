@@ -18,20 +18,20 @@ export const useStocksInfoSocket = (stockCode: string) => {
     // 데이터 패치
     fetchData();
 
-    // 소켓 연결
-    const { unsubscribe } = connectSocket(
-      WS_PATHS.SUB_ENDPOINT(stockCode),
-      WS_PATHS.PUB_ENDPOINT,
-      { action: "SUBSCRIBE", ids: [stockCode] },
-      (socketData) => {
-        setData(socketData); // 소켓 데이터로 업데이트
-      }
-    );
+    // // 소켓 연결
+    // const { unsubscribe } = connectSocket(
+    //   WS_PATHS.SUB_ENDPOINT(stockCode),
+    //   WS_PATHS.PUB_ENDPOINT,
+    //   { action: "SUBSCRIBE", ids: [stockCode] },
+    //   (socketData) => {
+    //     setData(socketData); // 소켓 데이터로 업데이트
+    //   }
+    // );
 
-    return () => {
-      // 구독 취소
-      unsubscribe();
-    };
+    // return () => {
+    //   // 구독 취소
+    //   unsubscribe();
+    // };
   }, [stockCode]);
 
   return { data };
