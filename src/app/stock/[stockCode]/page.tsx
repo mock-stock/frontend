@@ -8,7 +8,7 @@ import Header from "./header";
 import StockInfo from "./stockInfo";
 import StockChart from "./stockChart";
 import MyInvestmentInfo from "./myInvestments";
-import { useStocksInfoSoket } from "./hooks/useStocks";
+import { useStocksInfoSocket } from "./hooks/useStocks";
 
 export interface StockData {
   sid: number; //고유 식별자
@@ -43,7 +43,7 @@ const tabs: Tab[] = [
 ];
 
 export default function Page({ params: { stockCode } }: Params) {
-  const { data } = useStocksInfoSoket(stockCode);
+  const { data } = useStocksInfoSocket(stockCode);
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -64,7 +64,7 @@ export default function Page({ params: { stockCode } }: Params) {
     <div>
       <Header />
       <div className={style["stockInfo-container"]}>
-        <StockInfo stockData={data} />
+        {data && <StockInfo stockData={data} />}
       </div>
       <div className={style["tab-container"]}>
         {tabs.map((tab, index) => (
