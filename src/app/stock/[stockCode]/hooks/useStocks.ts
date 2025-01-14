@@ -21,7 +21,7 @@ export const useStocksInfoSoket = (stockCode: string) => {
       WS_PATHS.PUB_ENDPOINT,
       { action: "SUBSCRIBE", ids: [stockCode] },
       (data) => {
-        mutate(`/stocks/${stockCode}`, data, false);
+        mutate(`/stock/${stockCode}`, data, false);
       }
     );
 
