@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { connectSocket } from "@/lib/stompClient";
-import { WS_PATHS } from "@/lib/utils/paths";
+// import { connectSocket } from "@/lib/stompClient";
+// import { WS_PATHS } from "@/lib/utils/paths";
 import { StockData } from "../page";
 import { getStock } from "@/api/stock";
 

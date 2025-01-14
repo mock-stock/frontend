@@ -8,7 +8,8 @@ import Header from "./header";
 import StockInfo from "./stockInfo";
 import StockChart from "./stockChart";
 import MyInvestmentInfo from "./myInvestments";
-import { useStocksInfoSocket } from "./hooks/useStocks";
+// import { useStocksInfoSocket } from "./hooks/useStocks";
+import { getStock } from "@/api/stock";
 
 export interface StockData {
   sid: number; //고유 식별자
@@ -43,13 +44,23 @@ const tabs: Tab[] = [
 ];
 
 export default function Page({ params: { stockCode } }: Params) {
-  const { data } = useStocksInfoSocket(stockCode);
+  // const { data } = useStocksInfoSocket(stockCode);
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const router = useRouter();
   const search = searchParams.get("label");
 
   const [activeTab, setActiveTab] = useState<string>("chart");
+  const [data, setData] = useState<StockData>();
+  useEffect(() => {
+    if (!stockCode) return;
+    const fetchData = async () => {
+      const stockData = await getStock(stockCode);
+      setData(stockData);
+    };
+
+    fetchData();
+  }, [stockCode]);
 
   useEffect(() => {
     setActiveTab(search ?? tabs[0].label);
