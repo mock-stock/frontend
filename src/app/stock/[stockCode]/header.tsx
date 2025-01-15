@@ -6,39 +6,57 @@ import { useRouter } from "next/navigation";
 import { StockData } from "./page";
 // import { useStocksInfoSocket } from "./hooks/useStocks";
 import { useEffect, useState } from "react";
-import { getStock } from "@/api/stock";
+
+export async function getStock(stockCode: string) {
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/stock/${stockCode}`;
+
+  try {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      const errorMessage = await response.text();
+      throw new Error(
+        `HTTP error! status: ${response.status}, message: ${errorMessage}`
+      );
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error("Failed to fetch stock data:", error);
+    throw error;
+  }
+}
 
 export default function Header({ stockCode }: { stockCode: string }) {
   const router = useRouter();
   const [data, setData] = useState<StockData>();
+  const [error, setError] = useState<string | null>(null);
   // const { data } = useStocksInfoSocket(stockCode);
   console.log(data);
-  const fetchData = async () => {
-    const stockData = await getStock(stockCode);
-    setData(stockData);
-  };
 
   useEffect(() => {
-    if (!stockCode) return;
+    const fetchStockData = async () => {
+      const response = await fetch(`/api/stock?code=${stockCode}`);
+      if (!response.ok) {
+        const errorMessage = await response.text();
+        setError(`Error: ${errorMessage}`);
+        return;
+      }
+      const data = await response.json();
+      setData(data);
+    };
 
-    // 데이터 패치
-    fetchData();
-
-    // // 소켓 연결
-    // const { unsubscribe } = connectSocket(
-    //   WS_PATHS.SUB_ENDPOINT(stockCode),
-    //   WS_PATHS.PUB_ENDPOINT,
-    //   { action: "SUBSCRIBE", ids: [stockCode] },
-    //   (socketData) => {
-    //     setData(socketData); // 소켓 데이터로 업데이트
-    //   }
-    // );
-
-    // return () => {
-    //   // 구독 취소
-    //   unsubscribe();
-    // };
+    fetchStockData();
   }, [stockCode]);
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
+  if (!data) {
+    return <div>Loading...</div>;
+  }
+
   console.log(data);
   return (
     <header className={style["header-container"]}>
