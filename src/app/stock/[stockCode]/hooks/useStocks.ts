@@ -2,18 +2,27 @@ import { useEffect, useState } from "react";
 // import { connectSocket } from "@/lib/stompClient";
 // import { WS_PATHS } from "@/lib/utils/paths";
 import { StockData } from "../page";
-import { getStock } from "@/api/stock";
+// import { getStock } from "@/api/stock";
 
 export const useStocksInfoSocket = (stockCode: string) => {
   const [data, setData] = useState<StockData>();
+  const [error, setError] = useState<string | null>(null);
 
   const fetchData = async () => {
-    const stockData = await getStock(stockCode);
-    setData(stockData);
+    // const stockData = await getStock(stockCode);
+    // setData(stockData);
+    const response = await fetch(`/api/stock?code=${stockCode}`);
+    if (!response.ok) {
+      const errorMessage = await response.text();
+      setError(`Error: ${errorMessage}`);
+      return;
+    }
+    const data = await response.json();
+    setData(data);
   };
 
   useEffect(() => {
-    if (!stockCode) return;
+    // if (!stockCode) return;
 
     // 데이터 패치
     fetchData();
@@ -34,7 +43,7 @@ export const useStocksInfoSocket = (stockCode: string) => {
     // };
   }, [stockCode]);
 
-  return { data };
+  return { data, error };
 };
 
 // -- SWR

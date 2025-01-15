@@ -1,14 +1,14 @@
-// "use client";
-// import { useEffect, useState } from "react";
-// import style from "./stock.module.scss";
-// import { usePathname, useSearchParams } from "next/navigation";
-// import { useRouter } from "next/navigation";
+"use client";
+import { useEffect, useState } from "react";
+import style from "./stock.module.scss";
+import { usePathname, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 import Header from "./header";
-// import StockInfo from "./stockInfo";
-// import StockChart from "./stockChart";
-// import MyInvestmentInfo from "./myInvestments";
-// import { useStocksInfoSocket } from "./hooks/useStocks";
+import StockInfo from "./stockInfo";
+import StockChart from "./stockChart";
+import MyInvestmentInfo from "./myInvestments";
+import { useStocksInfoSocket } from "./hooks/useStocks";
 
 export interface StockData {
   sid: number; //고유 식별자
@@ -23,49 +23,50 @@ interface Params {
   params: { stockCode: string };
 }
 
-// interface Tab {
-//   label: string;
-//   name: string;
-//   content: (stockCode: string) => JSX.Element;
-// }
+interface Tab {
+  label: string;
+  name: string;
+  content: (stockCode: string) => JSX.Element;
+}
 
-// const tabs: Tab[] = [
-//   {
-//     label: "chart",
-//     name: "차트",
-//     content: () => <StockChart />,
-//   },
-//   {
-//     label: "myInvestments",
-//     name: "내주식",
-//     content: (stockCode) => <MyInvestmentInfo stockCode={stockCode} />,
-//   },
-// ];
+const tabs: Tab[] = [
+  {
+    label: "chart",
+    name: "차트",
+    content: () => <StockChart />,
+  },
+  {
+    label: "myInvestments",
+    name: "내주식",
+    content: (stockCode) => <MyInvestmentInfo stockCode={stockCode} />,
+  },
+];
 
 export default function Page({ params: { stockCode } }: Params) {
-  // const pathname = usePathname();
-  // const searchParams = useSearchParams();
-  // const router = useRouter();
-  // const search = searchParams.get("label");
+  const { data } = useStocksInfoSocket(stockCode);
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const search = searchParams.get("label");
 
-  // const [activeTab, setActiveTab] = useState<string>("chart");
+  const [activeTab, setActiveTab] = useState<string>("chart");
 
-  // useEffect(() => {
-  //   setActiveTab(search ?? tabs[0].label);
-  // }, [search]);
+  useEffect(() => {
+    setActiveTab(search ?? tabs[0].label);
+  }, [search]);
 
-  // const handleTabClick = (label: string) => {
-  //   setActiveTab(label);
-  //   router.replace(`${pathname}?label=${label}`);
-  // };
-
+  const handleTabClick = (label: string) => {
+    setActiveTab(label);
+    router.replace(`${pathname}?label=${label}`);
+  };
+  console.log(data);
   return (
     <div>
-      <Header stockCode={stockCode} />
-      {/* <div className={style["stockInfo-container"]}>
+      <Header />
+      <div className={style["stockInfo-container"]}>
         {data && <StockInfo stockData={data} />}
-      </div> */}
-      {/* <div className={style["tab-container"]}>
+      </div>
+      <div className={style["tab-container"]}>
         {tabs.map((tab, index) => (
           <div
             key={index}
@@ -81,7 +82,7 @@ export default function Page({ params: { stockCode } }: Params) {
       <hr className="bar" />
       <div className={style["tab-content"]}>
         {tabs.find((tab) => tab.label === activeTab)?.content(stockCode)}
-      </div> */}
+      </div>
     </div>
   );
 }
