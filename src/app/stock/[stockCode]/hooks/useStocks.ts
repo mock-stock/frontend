@@ -19,9 +19,7 @@ export const useStocksInfoSocket = (stockCode: string) => {
   };
 
   useEffect(() => {
-    // if (!stockCode) return;
-
-    // 데이터 패치
+    // 종목 정보 데이터 패치
     fetchData();
 
     // 소켓 연결
