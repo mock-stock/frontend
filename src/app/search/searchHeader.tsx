@@ -16,7 +16,7 @@ export default function SearchHeader() {
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const keyword = inputValue.trim();
+    const keyword = inputValue.trim().replace(/\s+/g, "");
     const url = `/search/result?search_query=${keyword}`;
     if (keyword) {
       router.replace(`${url}`);
