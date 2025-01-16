@@ -59,7 +59,7 @@ export default function Page({ params: { stockCode } }: Params) {
     setActiveTab(label);
     router.replace(`${pathname}?label=${label}`);
   };
-  console.log(data);
+
   return (
     <div>
       <Header />
