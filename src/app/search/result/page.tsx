@@ -1,7 +1,7 @@
 import style from "./result.module.scss";
 import ResultStockList from "./resultStockList";
 import { Suspense } from "react";
-import { getKeywordStock } from "@/api/keyword";
+import { getKeywordStock } from "@/app/api/keyword";
 import SearchHeader from "../searchHeader";
 
 export interface StockData {

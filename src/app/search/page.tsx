@@ -1,9 +1,9 @@
 import { Suspense } from "react";
-import { getHistory } from "@/api/history";
+import { getHistory } from "@/app/api/history";
 import { getServerToken } from "@/lib/auth";
 import SearchHistoryList from "./searchHistoryList";
 
-import style from "./search.module.scss";
+import style from "./page.module.scss";
 import SearchHeader from "./searchHeader";
 export interface HistoryData {
   fid: number;

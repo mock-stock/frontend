@@ -1,6 +1,6 @@
 "use client";
 import type { HistoryData } from "./page";
-import { deleteHistory } from "@/api/history";
+import { deleteHistory } from "@/app/api/history";
 import Icons from "@/components/icons";
 import style from "./searchHistoryList.module.scss";
 

@@ -4,7 +4,7 @@ import { StockData } from "./page";
 
 import style from "./resultStockList.module.scss";
 import Icons from "@/components/icons";
-import { deleteStock, postStock } from "@/api/stock";
+import { deleteStock, postStock } from "@/app/api/stock";
 
 export default function ResultStockList({
   stockList,
