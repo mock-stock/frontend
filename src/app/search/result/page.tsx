@@ -1,8 +1,8 @@
 import style from "./result.module.scss";
 import ResultStockList from "./resultStockList";
 import { Suspense } from "react";
-import { getKeywordStock } from "@/app/api/keyword";
 import SearchHeader from "../searchHeader";
+import { getKeywordStock } from "@/app/api/keyword";
 
 export interface StockData {
   sid: number;
@@ -10,13 +10,13 @@ export interface StockData {
   stck_code: string;
 }
 
-export default async function Page(props: {
-  searchParams: Promise<{ search_query: string }>;
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: { search_query: string };
 }) {
-  const searchParams = await props.searchParams;
-  const search = searchParams.search_query ?? "";
-
-  const data: StockData[] = search && (await getKeywordStock(search));
+  const { search_query } = searchParams;
+  const data: StockData[] = await getKeywordStock(search_query ?? "");
 
   return (
     <>
@@ -24,11 +24,11 @@ export default async function Page(props: {
         <SearchHeader />
         <div className={style["stockList-container"]}>
           <h2 className={style["title"]}>주식</h2>
-          {data.length > 0 ? (
+          {data?.length > 0 ? (
             <ResultStockList stockList={data} />
           ) : (
             <p className={style["no-results"]}>
-              <span>&quot;{search}&quot;</span>에 대한 검색결과가 없어요.
+              <span>&quot;{search_query}&quot;</span>에 대한 검색결과가 없어요.
             </p>
           )}
         </div>
