@@ -1,0 +1,66 @@
+@use "@/styles/sizes";
+$red: #ff3b3c;
+$blue: #3180f2;
+$stroke: #cfd6dd;
+$transparent-red: rgba(255, 59, 60, 0.5);
+$transparent-blue: rgba(49, 128, 242, 0.5);
+
+.chart-container {
+  margin-top: 20px;
+  background-color: rgb(244, 244, 244);
+}
+/* 캔들 - svg */
+.svg {
+  cursor: pointer;
+}
+/* 캔들 스타일 - 봉 */
+.candle {
+  rx: 2;
+  ry: 2;
+}
+/* 캔들 스타일 - 라인*/
+.candle-line {
+  stroke: $stroke;
+  stroke-width: 1;
+}
+/* 캔들 - 툴팁 스타일 */
+.tooltip {
+  background: white;
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 12px;
+  pointer-events: none;
+  display: "flex";
+  flex-direction: "column";
+}
+
+.candle-blue {
+  fill: $blue;
+}
+
+.candle-red {
+  fill: $red;
+}
+
+// 라인
+.line {
+  stroke: Width 3px;
+  stroke-linecap: "round";
+}
+
+.line-red {
+  stroke: $red; // 빨간색 선
+}
+
+.line-blue {
+  stroke: $blue; // 파란색 선
+}
+
+.transparent-red {
+  fill: $transparent-red;
+}
+
+.transparent-blue {
+  fill: $transparent-blue;
+}

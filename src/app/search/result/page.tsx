@@ -8,7 +8,6 @@ export interface StockData {
   sid: number;
   stck_name: string;
   stck_code: string;
-  is_watched: boolean;
 }
 
 export default async function Page(props: {
