@@ -7,7 +7,7 @@ $transparent-blue: rgba(49, 128, 242, 0.5);
 
 .chart-container {
   margin-top: 20px;
-  background-color: rgb(244, 244, 244);
+  // background-color: rgb(244, 244, 244);
 }
 /* 캔들 - svg */
 .svg {
@@ -45,7 +45,7 @@ $transparent-blue: rgba(49, 128, 242, 0.5);
 
 // 라인
 .line {
-  stroke: Width 3px;
+  stroke-width: 3px;
   stroke-linecap: "round";
 }
 

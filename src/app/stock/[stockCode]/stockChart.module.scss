@@ -1,0 +1,39 @@
+@use "@/styles/sizes";
+.chart-container {
+  margin: 10px sizes.$mobile-space-base;
+  // background-color: aqua;
+  display: flex;
+  justify-content: space-between;
+  height: 34px;
+}
+
+.period-options {
+  display: flex;
+  width: 100%;
+  margin-right: 10px;
+  // background-color: chocolate;
+}
+.chart-type-options {
+  width: 34px;
+  height: 34px;
+  border-radius: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  background-color: #edf2f7;
+}
+
+.option-button {
+  // padding: 0 20px;
+  flex-grow: 1;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: transparent;
+  transition: background-color 0.3s;
+
+  &.active {
+    background-color: #edf2f7;
+  }
+}

@@ -1,5 +1,13 @@
 import Link from "next/link";
-import { Search, ChevronLeft, WatchStar, Close, Pay } from "./icons";
+import {
+  Search,
+  ChevronLeft,
+  WatchStar,
+  Close,
+  Pay,
+  ChartLine,
+  ChartCandle,
+} from "./icons";
 
 const components = {
   search: Search,
@@ -7,6 +15,8 @@ const components = {
   watchStar: WatchStar,
   close: Close,
   pay: Pay,
+  chartLine: ChartLine,
+  chartCandle: ChartCandle,
 };
 
 type IconProps = {

@@ -99,3 +99,48 @@ export function Pay(svgProps: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+export function ChartLine(svgProps: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...svgProps}
+    >
+      <path
+        d="M3 18L9.5 9.5L14 15L21 7"
+        stroke="#4C92F7"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  );
+}
+export function ChartCandle(svgProps: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...svgProps}
+    >
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M7 5.47827C7 5.20213 6.77614 4.97827 6.5 4.97827C6.22386 4.97827 6 5.20213 6 5.47827V7.21729H4C2.89543 7.21729 2 8.11272 2 9.21728V14.7825C2 15.8871 2.89543 16.7825 4 16.7825H6L6 19.3913C6 19.6675 6.22386 19.8913 6.5 19.8913C6.77614 19.8913 7 19.6675 7 19.3913V16.7825H9C10.1046 16.7825 11 15.8871 11 14.7825V9.21729C11 8.11272 10.1046 7.21729 9 7.21729H7V5.47827Z"
+        fill="#4C92F7"
+      />
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M18 2C18 1.72386 17.7761 1.5 17.5 1.5C17.2239 1.5 17 1.72386 17 2V4.60864H15C13.8954 4.60864 13 5.50407 13 6.60864V17.3913C13 18.4958 13.8954 19.3913 15 19.3913H17V22C17 22.2761 17.2239 22.5 17.5 22.5C17.7761 22.5 18 22.2761 18 22V19.3913H20C21.1046 19.3913 22 18.4958 22 17.3913V6.60864C22 5.50407 21.1046 4.60864 20 4.60864H18V2Z"
+        fill="#FF3B3C"
+      />
+    </svg>
+  );
+}
