@@ -3,13 +3,11 @@ import { connectSocket } from "@/lib/stompClient";
 import { WS_PATHS } from "@/lib/utils/paths";
 import { StockData } from "../page";
 import useSWR from "swr";
-import axios from "axios";
-
-const fetcher = (url: string) => axios.get(url).then((res) => res.data);
+import { fetcher } from "@/app/api/api";
 
 export const useStocksInfoSocket = (stockCode: string) => {
   const { data, error, mutate } = useSWR(
-    `/api/stock?code=${stockCode}`,
+    `/api/stock/info?code=${stockCode}`,
     fetcher
   );
 
