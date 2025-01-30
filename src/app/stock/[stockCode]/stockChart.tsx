@@ -54,7 +54,7 @@ export default function StockChart({ size, stockCode }: Props) {
       `/api/stock/chart?stck_code=${stockCode}&from_date=${fromDate}&to_date=${toDate}&interval=${interval}`
     );
   };
-  console.log(chartData);
+
   const date = dataToArray(chartData, "stck_bsop_date");
   const close = dataToArray(chartData, "stck_clpr");
   const open = dataToArray(chartData, "stck_oprc");
