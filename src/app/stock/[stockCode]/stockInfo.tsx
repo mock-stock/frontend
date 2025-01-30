@@ -1,4 +1,4 @@
-import Icons from "@/components/icons";
+// import Icons from "@/components/icons";
 import { StockData } from "./page";
 import {
   formatNumberToKoreanLocale,
@@ -24,14 +24,13 @@ export default function StockInfo({ stockData }: StockInfoProps) {
     <section>
       <div className={style["stock-header"]}>
         <h2 className={style["info-title"]}>{stck_name}</h2>
-        <Icons kind="watchStar" fill={"#2D3748"} onClick={() => {}} />
+        {/* <Icons kind="watchStar" fill={"#2D3748"} onClick={() => {}} /> */}
       </div>
       <p className={style["stock-details"]}>
         {formatNumberToKoreanLocale(stck_cur_price)}
         <span>
           {formatNumberWithSign(stck_prev_cls_diff_percent)}% (
           {formatNumberToKoreanLocale(stck_prev_cls_diff_price)})
-          {/* Todo: 다시확인  */}
         </span>
       </p>
     </section>
