@@ -44,7 +44,7 @@ export default function Home() {
           </div>
           <div className={style.empty}>
             <Icons kind="empty" size={100} />
-            <p className={style["empty-text"]}>내역이 없어요.</p>
+            <p className={style["empty-text"]}>투자 내역이 없어요.</p>
           </div>
         </section>
       </main>
