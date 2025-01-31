@@ -10,6 +10,7 @@ import {
   ChartCandle,
 } from "./icons";
 import { Empty } from "./empty";
+import Kakao from "./social";
 
 const components = {
   search: Search,
@@ -21,6 +22,7 @@ const components = {
   chartLine: ChartLine,
   chartCandle: ChartCandle,
   empty: Empty,
+  kakao: Kakao,
 };
 
 type IconProps = {

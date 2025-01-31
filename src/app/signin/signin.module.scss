@@ -1,0 +1,83 @@
+@use "@/styles/sizes";
+
+$content_sixe: 40px;
+
+.content-wrapper {
+  height: 100vh;
+  min-height: 100vh;
+}
+
+// 헤더
+.header-container {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  height: 48px;
+  padding: 0 sizes.$mobile-space-base;
+  display: flex;
+  align-items: center;
+  background-color: #f2f4f6;
+}
+
+.back-icon-box {
+  width: $content_sixe;
+  height: $content_sixe;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #dfe1e7;
+  border-radius: 10px;
+}
+
+// 로그인 컨텐츠
+.signin-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 48px);
+  padding: 0 sizes.$mobile-space-base * 2;
+}
+.signin-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  padding-bottom: 50px;
+}
+
+.title {
+  float: left;
+  font-size: 1.5rem;
+  line-height: 35px;
+  margin-bottom: 10px;
+  font-weight: 500;
+  > span {
+    text-align: left;
+    font-size: 1.5rem;
+    color: #477eea;
+    font-weight: 500;
+  }
+}
+
+.subTitle {
+  float: left;
+  font-size: 0.875rem;
+  color: #545454;
+  font-weight: 300;
+}
+.button {
+  width: 100%;
+  height: 45px;
+  border: none;
+  border-radius: 10px;
+  background-color: #fee500;
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  > p {
+    padding-left: 10px;
+    color: #000;
+  }
+}
