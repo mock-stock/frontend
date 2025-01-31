@@ -1,6 +1,6 @@
 @use "@/styles/sizes";
 .chart-container {
-  margin: 10px sizes.$mobile-space-base;
+  padding: 10px sizes.$mobile-space-base;
   // background-color: aqua;
   display: flex;
   justify-content: space-between;

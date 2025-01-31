@@ -1,7 +1,13 @@
 @use "@/styles/sizes";
+.page-container {
+  background-color: #fff;
+  min-height: 100vh;
+  height: 100vh;
+}
 
 .stockList-container {
-  margin: 20px sizes.$mobile-space-base;
+  padding: 20px sizes.$mobile-space-base;
+  background-color: #fff;
 }
 
 .title {

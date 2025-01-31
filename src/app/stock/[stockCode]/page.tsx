@@ -59,7 +59,7 @@ export default function Page({
   };
 
   return (
-    <div>
+    <div className={style["section"]}>
       <Header />
       <div className={style["stockInfo-container"]}>
         {stockData && <StockInfo stockData={stockData} />}

@@ -19,7 +19,7 @@ export default async function Page({
   const data: StockData[] = await getKeywordStock(search_query ?? "");
 
   return (
-    <>
+    <div className={style["page-container"]}>
       <Suspense fallback={<p>Loading...</p>}>
         <SearchHeader />
         <div className={style["stockList-container"]}>
@@ -33,6 +33,6 @@ export default async function Page({
           )}
         </div>
       </Suspense>
-    </>
+    </div>
   );
 }

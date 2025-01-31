@@ -70,7 +70,7 @@ export default function StockChart({ size, stockCode }: Props) {
           <StockCandle size={size} chartData={candle} />
         )}
         {chartType === "line" && <StockLine size={size} chartData={line} />}
-        <p>{selectedPeriod} 차트가 표시됩니다.</p>
+        {/* <p>{selectedPeriod} 차트가 표시됩니다.</p> */}
       </div>
       <div className={style["chart-container"]}>
         <div className={style["period-options"]}>

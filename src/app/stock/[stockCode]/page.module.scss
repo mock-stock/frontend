@@ -1,13 +1,21 @@
 @use "@/styles/sizes";
 
+.section {
+  height: 100vh;
+  min-height: 100vh;
+  background-color: #fff;
+}
+
 .stockInfo-container {
-  margin: 20px sizes.$mobile-space-base;
+  padding: 20px sizes.$mobile-space-base;
+  background-color: #fff;
 }
 
 //탭메뉴
 .tab-container {
   display: flex;
   padding: 0 sizes.$mobile-space-base;
+  background-color: #fff;
 }
 
 .bar {
@@ -25,4 +33,8 @@
 
 .tab.active {
   border-bottom: 2px solid #5a5d5f; //활성 탭:하단 경계선
+}
+
+.tab-content {
+  background-color: #fff;
 }

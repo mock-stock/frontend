@@ -21,7 +21,7 @@ export default function StockInfo({ stockData }: StockInfoProps) {
   } = stockData;
 
   return (
-    <section>
+    <section className={style["stockInfo-"]}>
       <div className={style["stock-header"]}>
         <h2 className={style["info-title"]}>{stck_name}</h2>
         {/* <Icons kind="watchStar" fill={"#2D3748"} onClick={() => {}} /> */}
