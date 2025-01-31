@@ -1,0 +1,105 @@
+@use "@/styles/sizes";
+
+$content_sixe: 40px;
+
+// 메인
+.home-container {
+  min-height: 100vh;
+  padding-bottom: 20px;
+  height: 100vh;
+}
+
+// 헤더
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  height: 48px;
+  padding: 0 sizes.$mobile-space-base;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+}
+
+// 마이페이 (MypaySection)
+.mypay-container {
+  background-color: #fff;
+  padding: sizes.$mobile-space-base;
+  margin-bottom: 10px;
+}
+.title-box {
+  display: flex;
+  align-items: center;
+  .title {
+    padding-left: 4px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    > span {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: #477eea;
+    }
+  }
+}
+
+.pay-box {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.pay {
+  font-size: 1.25rem;
+  // font-weight: 700;
+}
+.btn {
+  padding: 10px 14px;
+  background-color: #e8f2ff;
+  border: none;
+  border-radius: 10px;
+  color: #477eea;
+  font-weight: 700;
+}
+
+//주문내역 (OrderHistorySection)
+.orderHistory-container {
+  background-color: #fff;
+  padding: sizes.$mobile-space-base;
+  margin-bottom: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+//내투자 (InvestmentSection)
+.InvestmentSection-container {
+  background-color: #fff;
+  padding: sizes.$mobile-space-base;
+  .title {
+    font-weight: 500;
+    margin-bottom: 18px;
+  }
+}
+.subTitle-span {
+  font-size: 0.75rem;
+  color: #9b9da0;
+}
+.subTitle {
+  margin: 8px 0;
+  font-size: 1.25rem;
+}
+.price-details {
+  font-size: 0.75rem;
+}
+.empty {
+  margin: 50px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.empty-text {
+  padding-top: 30px;
+  color: #9b9da0;
+}

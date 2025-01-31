@@ -2,21 +2,25 @@ import Link from "next/link";
 import {
   Search,
   ChevronLeft,
+  ChevronRight,
   WatchStar,
   Close,
   Pay,
   ChartLine,
   ChartCandle,
 } from "./icons";
+import { Empty } from "./empty";
 
 const components = {
   search: Search,
   chevronLeft: ChevronLeft,
+  chevronRight: ChevronRight,
   watchStar: WatchStar,
   close: Close,
   pay: Pay,
   chartLine: ChartLine,
   chartCandle: ChartCandle,
+  empty: Empty,
 };
 
 type IconProps = {

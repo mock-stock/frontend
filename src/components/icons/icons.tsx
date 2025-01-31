@@ -11,7 +11,7 @@ export function Alarm(svgProps: SVGProps<SVGSVGElement>) {
       <path
         d="M15 17V18C15 19.6569 13.6569 21 12 21C10.3431 21 9 19.6569 9 18V17M15 17H9M15 17H18.5905C18.973 17 19.1652 17 19.3201 16.9478C19.616 16.848 19.8475 16.6156 19.9473 16.3198C19.9997 16.1643 19.9997 15.9715 19.9997 15.5859C19.9997 15.4172 19.9995 15.3329 19.9863 15.2524C19.9614 15.1004 19.9024 14.9563 19.8126 14.8312C19.7651 14.7651 19.7048 14.7048 19.5858 14.5858L19.1963 14.1963C19.0706 14.0706 19 13.9001 19 13.7224V10C19 6.134 15.866 2.99999 12 3C8.13401 3.00001 5 6.13401 5 10V13.7224C5 13.9002 4.92924 14.0706 4.80357 14.1963L4.41406 14.5858C4.29476 14.7051 4.23504 14.765 4.1875 14.8312C4.09766 14.9564 4.03815 15.1004 4.0132 15.2524C4 15.3329 4 15.4172 4 15.586C4 15.9715 4 16.1642 4.05245 16.3197C4.15225 16.6156 4.3848 16.848 4.68066 16.9478C4.83556 17 5.02701 17 5.40956 17H9"
         stroke="#B1B8C0"
-        stroke-width="2"
+        strokeWidth="2"
       />
     </svg>
   );
@@ -42,6 +42,20 @@ export function ChevronLeft(svgProps: SVGProps<SVGSVGElement>) {
     >
       <g>
         <path d="M15 6L9 12L15 18" stroke="#2D3748" strokeWidth="2" />
+      </g>
+    </svg>
+  );
+}
+export function ChevronRight(svgProps: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...svgProps}
+    >
+      <g>
+        <path d="M9 6L15 12L9 18" stroke="#2D3748" strokeWidth="2" />
       </g>
     </svg>
   );
@@ -112,9 +126,9 @@ export function ChartLine(svgProps: SVGProps<SVGSVGElement>) {
       <path
         d="M3 18L9.5 9.5L14 15L21 7"
         stroke="#4C92F7"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
@@ -130,14 +144,14 @@ export function ChartCandle(svgProps: SVGProps<SVGSVGElement>) {
       {...svgProps}
     >
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M7 5.47827C7 5.20213 6.77614 4.97827 6.5 4.97827C6.22386 4.97827 6 5.20213 6 5.47827V7.21729H4C2.89543 7.21729 2 8.11272 2 9.21728V14.7825C2 15.8871 2.89543 16.7825 4 16.7825H6L6 19.3913C6 19.6675 6.22386 19.8913 6.5 19.8913C6.77614 19.8913 7 19.6675 7 19.3913V16.7825H9C10.1046 16.7825 11 15.8871 11 14.7825V9.21729C11 8.11272 10.1046 7.21729 9 7.21729H7V5.47827Z"
         fill="#4C92F7"
       />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M18 2C18 1.72386 17.7761 1.5 17.5 1.5C17.2239 1.5 17 1.72386 17 2V4.60864H15C13.8954 4.60864 13 5.50407 13 6.60864V17.3913C13 18.4958 13.8954 19.3913 15 19.3913H17V22C17 22.2761 17.2239 22.5 17.5 22.5C17.7761 22.5 18 22.2761 18 22V19.3913H20C21.1046 19.3913 22 18.4958 22 17.3913V6.60864C22 5.50407 21.1046 4.60864 20 4.60864H18V2Z"
         fill="#FF3B3C"
       />
