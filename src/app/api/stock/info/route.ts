@@ -1,3 +1,4 @@
+import { Stock } from "@/generate/Stock";
 import axios from "axios";
 import { NextResponse } from "next/server";
 
@@ -12,10 +13,9 @@ export async function GET(request: Request) {
     );
   }
 
-  const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/stock/${stockCode}`;
-
   try {
-    const response = await axios.get(apiUrl);
+    const stockApi = new Stock();
+    const response = await stockApi.stockDetail(stockCode);
 
     return NextResponse.json(response.data, { status: 200 });
   } catch (error) {

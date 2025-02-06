@@ -1,16 +1,16 @@
-import { ChartData } from "@/app/stock/[stockCode]/stockChart";
+import { StockKisHistoryDto } from "@/generate/data-contracts";
 
 /**
  * 특정 키에 해당하는 값을 추출하여 배열로 반환합니다.
- * @param {ChartData[]} dataArray - ChartData 객체의 배열
+ * @param {StockKisHistoryDto[]} dataArray - ChartData 객체의 배열
  * @param {T} key - 추출할 속성의 키
- * @returns {ChartData[T][]} - 주어진 키에 해당하는 값의 배열
+ * @returns {StockKisHistoryDto[T][]} - 주어진 키에 해당하는 값의 배열
  */
 
-export const dataToArray = <T extends keyof ChartData>(
-  dataArray: ChartData[],
+export const dataToArray = <T extends keyof StockKisHistoryDto>(
+  dataArray: StockKisHistoryDto[],
   key: T
-): ChartData[T][] => {
+): StockKisHistoryDto[T][] => {
   return dataArray.map((item) => item[key]).reverse();
 };
 

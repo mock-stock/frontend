@@ -1,93 +1,59 @@
 "use client";
 import { useEffect, useState } from "react";
 import style from "./page.module.scss";
-import { usePathname, useSearchParams } from "next/navigation";
-import { useRouter } from "next/navigation";
-import Header from "./header";
-import StockInfo from "./stockInfo";
-// import MyInvestmentInfo from "./myInvestments";
+import { usePathname } from "next/navigation";
+import Header from "./(section)/header";
+import StockInfoSection from "./(section)/stockInfoSection";
 import { useStocksInfoSocket } from "./hooks/useStocks";
-import StockChart from "./stockChart";
-import { useWindowSize, WindowSize } from "./hooks/useWindowSize";
+import TabMenuContentSection, {
+  TabType,
+} from "./(section)/tabMenuContentSection";
 
-export interface StockData {
-  sid: number; //고유 식별자
-  stck_name: string; //종목명
-  stck_code: string; //종목코드
-  stck_cur_price: number; //현재 시세가
-  stck_prev_cls_diff_price: number; //전일종가 대비 현재가 차익 금액
-  stck_prev_cls_diff_percent: number; //전일종가 대비 현재가 차익 퍼센트
+interface StockParamProps {
+  params: {
+    stockCode: string;
+  };
+  searchParams: {
+    label?: string;
+  };
 }
 
-interface Tab {
-  label: string;
-  name: string;
-}
+export default function Page({ params, searchParams }: StockParamProps) {
+  const { data, error } = useStocksInfoSocket(
+    `/api/stock/info?code=${params.stockCode}`,
+    params.stockCode
+  );
 
-const tabs: Tab[] = [
-  {
-    label: "chart",
-    name: "차트",
-  },
-  {
-    label: "myInvestments",
-    name: "내주식",
-  },
-];
+  const [activeTab, setActiveTab] = useState<TabType>("chart");
 
-export default function Page({
-  params: { stockCode },
-}: {
-  params: { stockCode: string };
-}) {
-  const { data: stockData } = useStocksInfoSocket(stockCode);
-  const size: WindowSize = useWindowSize();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const router = useRouter();
-  const search = searchParams.get("label");
-
-  const [activeTab, setActiveTab] = useState<string>("chart");
+  function isTabType(label: string): label is TabType {
+    return label === "chart" || label === "myInvestments";
+  }
 
   useEffect(() => {
-    setActiveTab(search ?? tabs[0].label);
-  }, [search]);
+    const searchLabel = searchParams.label;
+    if (searchLabel && isTabType(searchLabel)) {
+      setActiveTab(searchParams.label as TabType);
+    }
+  }, [searchParams.label]);
 
-  const handleTabClick = (label: string) => {
-    setActiveTab(label);
-    router.replace(`${pathname}?label=${label}`);
-  };
+  const pathname = usePathname();
+
+  if (error) return;
+  if (!data) return;
 
   return (
     <div className={style["section"]}>
       <Header />
-      <div className={style["stockInfo-container"]}>
-        {stockData && <StockInfo stockData={stockData} />}
-      </div>
-      <div className={style["tab-container"]}>
-        {tabs.map((tab, index) => (
-          <div
-            key={index}
-            className={`
-            ${style.tab} 
-            ${activeTab === tab.label ? style.active : ""}
-            `}
-            onClick={() => handleTabClick(tab.label)}
-          >
-            {tab.name}
-          </div>
-        ))}
-      </div>
-      <hr className="bar" />
-      <div className={style["tab-content"]}>
-        {activeTab === "chart" && (
-          <StockChart size={size} stockCode={stockCode} />
-        )}
-        {activeTab === "myInvestments" && (
-          <>myInvestments</>
-          // <MyInvestmentInfo stockCode={stockCode} />
-        )}
-      </div>
+      <main>
+        <StockInfoSection data={data} />
+        <TabMenuContentSection
+          stockCode={params.stockCode}
+          activeTab={activeTab}
+          routerPath={`${pathname}?label=${activeTab}`}
+          setActiveTab={setActiveTab}
+        />
+      </main>
     </div>
   );
 }

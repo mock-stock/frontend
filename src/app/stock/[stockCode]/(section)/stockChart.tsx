@@ -1,65 +1,64 @@
 "use client";
-import useSWR from "swr";
-import StockLine from "../../../components/chart/stockLine";
-import { WindowSize } from "./hooks/useWindowSize";
+import StockLine from "../../../../components/chart/stockLine";
+import { WindowSize } from "../hooks/useWindowSize";
 import { fetcher } from "@/app/api/api";
-import StockCandle from "../../../components/chart/stockCandle";
+import StockCandle from "../../../../components/chart/stockCandle";
 import { dataToArray } from "@/lib/utils/chartDataUtils";
 import style from "./stockChart.module.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Icons from "@/components/icons";
+import { StockHistoryData } from "@/generate/data-contracts";
 
 type SelectionType = "1일" | "1주" | "한달" | "3개월" | "1년" | "5년";
 
-export interface ChartData {
-  stck_name: string; //종목이름
-  stck_bsop_date: string; // 시간
-  stck_oprc: number; // 시가
-  stck_clpr: number; // 종가
-  stck_hgpr: number; // 고가
-  stck_lwpr: number; // 저가
-  acml_vol: number; // 누적 거래량
-  stck_change_rate: number; // 변화율
-}
+type IntervalType = "MINUTE" | "D" | "W" | "M";
 
 type Props = {
   size: WindowSize;
   stockCode: string;
 };
+const options: SelectionType[] = ["1일", "1주", "한달", "3개월", "1년", "5년"];
 
 export default function StockChart({ size, stockCode }: Props) {
-  const options: SelectionType[] = [
-    "1일",
-    "1주",
-    "한달",
-    "3개월",
-    "1년",
-    "5년",
-  ];
+  const [data, setData] = useState<StockHistoryData | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const [selectedPeriod, setSelectedPeriod] = useState<SelectionType>("1일");
   const [chartType, setChartType] = useState("candle");
   const { fromDate, toDate, interval } =
     getDateRangeAndInterval(selectedPeriod);
 
-  const { data: chartData, mutate } = useSWR(
-    `/api/stock/chart?stck_code=${stockCode}&from_date=${fromDate}&to_date=${toDate}&interval=${interval}`,
-    fetcher
-  );
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetcher(
+          `/api/stock/chart?stck_code=${stockCode}&from_date=${fromDate}&to_date=${toDate}&interval=${interval}`
+        );
+        setData(response);
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setError(`오류가 발생했습니다: ${err.message}`);
+        } else {
+          setError("알 수 없는 오류가 발생했습니다.");
+        }
+      }
+    };
 
-  if (!chartData) return;
+    fetchData();
+  }, [stockCode, fromDate, toDate, interval]);
+
+  if (error) return;
+  if (!data) return;
+
   const handlePeriodChange = (period: SelectionType) => {
     setSelectedPeriod(period);
-    const { fromDate, toDate, interval } = getDateRangeAndInterval(period);
-    mutate(
-      `/api/stock/chart?stck_code=${stockCode}&from_date=${fromDate}&to_date=${toDate}&interval=${interval}`
-    );
+    getDateRangeAndInterval(period);
   };
 
-  const date = dataToArray(chartData, "stck_bsop_date");
-  const close = dataToArray(chartData, "stck_clpr");
-  const open = dataToArray(chartData, "stck_oprc");
-  const high = dataToArray(chartData, "stck_hgpr");
-  const low = dataToArray(chartData, "stck_lwpr");
+  const date = dataToArray(data, "stck_bsop_date");
+  const close = dataToArray(data, "stck_clpr");
+  const open = dataToArray(data, "stck_oprc");
+  const high = dataToArray(data, "stck_hgpr");
+  const low = dataToArray(data, "stck_lwpr");
   const candle = { date, open, close, high, low };
   const line = { close, high, low };
 
@@ -98,10 +97,12 @@ export default function StockChart({ size, stockCode }: Props) {
   );
 }
 
-const getDateRangeAndInterval = (selection: SelectionType) => {
+const getDateRangeAndInterval = (
+  selection: SelectionType
+): { fromDate: string; toDate: string; interval: IntervalType } => {
   const today = new Date();
   let fromDate = today;
-  let interval;
+  let interval: IntervalType;
 
   switch (selection) {
     case "1일":

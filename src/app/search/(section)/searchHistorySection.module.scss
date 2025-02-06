@@ -1,7 +1,20 @@
+@use "@/styles/sizes";
+
+.historyList-container {
+  padding: 20px sizes.$mobile-space-base;
+  background-color: #fff;
+  min-height: 100vh;
+  height: 100vh;
+}
+
 .historyList-wrapper {
   display: flex;
   flex-direction: column;
   padding: 10px 0;
+}
+.title {
+  font-size: 16px;
+  font-weight: bold;
 }
 
 .history-item {

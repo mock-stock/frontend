@@ -1,4 +1,4 @@
-import style from "./main.module.scss";
+import style from "./page.module.scss";
 
 import Header from "./(section)/header";
 import MypaySection from "./(section)/mypaySection";
