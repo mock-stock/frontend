@@ -6,7 +6,7 @@ export default function SigninSection() {
   return (
     <section className={style["signin-section"]}>
       <div className={style["signin-container"]}>
-        <div>
+        <div className={style["title-box"]}>
           <h2 className={style["title"]}>
             간편하게 <span>로그인</span>하고 <br /> 모든 기능을 이용해 보세요!
           </h2>
