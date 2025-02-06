@@ -1,8 +1,7 @@
-import { Client, IFrame, IMessage, StompSubscription } from "@stomp/stompjs";
+import { Client, IFrame, StompSubscription } from "@stomp/stompjs";
 import SockJS from "sockjs-client";
-import { SOCKET_URL } from "@/lib/utils/paths"; // 소켓 URL을 가져옵니다.
-import { StockData } from "@/app/stock/[stockCode]/page";
-
+import { SOCKET_URL } from "@/lib/utils/paths";
+import { StockDetailData, StockInfoDto } from "@/generate/data-contracts";
 export interface PublishMessage {
   action: string;
   ids?: string[];
@@ -14,7 +13,7 @@ export const connectSocket = (
   SUB_ENDPOINT: string,
   PUB_ENDPOINT: string,
   PUB_BODY: PublishMessage,
-  onMessageReceived: (data: StockData) => void
+  onMessageReceived: (data: StockDetailData) => void
 ) => {
   let subscriptionId: StompSubscription | null = null;
 
@@ -31,16 +30,19 @@ export const connectSocket = (
     onConnect: (connected: IFrame) => {
       console.log("[+] WebSocket 연결이 되었습니다.", connected);
       // 구독 설정
-      subscriptionId = stompClient.subscribe(
-        SUB_ENDPOINT,
-        (message: IMessage) => {
-          const messageData = JSON.parse(message.body);
+      subscriptionId = stompClient.subscribe(SUB_ENDPOINT, (message) => {
+        let messageData: StockInfoDto;
+        try {
+          messageData = JSON.parse(message.body);
           onMessageReceived(messageData); // 메시지 수신콜백
+        } catch (error) {
+          console.error("메시지 파싱 오류:", error);
+          return;
         }
-      );
+      });
 
       // 발행 - 웹 소켓 메시지 전송
-      const publishMessage = { PUB_BODY };
+      const publishMessage: PublishMessage = PUB_BODY;
       stompClient.publish({
         destination: PUB_ENDPOINT,
         body: JSON.stringify(publishMessage),

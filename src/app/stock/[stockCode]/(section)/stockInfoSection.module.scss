@@ -1,3 +1,10 @@
+@use "@/styles/sizes";
+
+.stockInfo-container {
+  padding: 20px sizes.$mobile-space-base;
+  background-color: #fff;
+}
+
 .stock-header {
   display: flex;
   justify-content: space-between;

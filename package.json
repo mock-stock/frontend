@@ -6,14 +6,16 @@
     "server": "json-server src/server/db.json --port 5001",
     "client": "next dev",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
-    "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generate:api": "dotenv -e .env -- sh -c 'curl -X GET \"$SWAGGER_API_URL\" -o ./docs/openapi.json && swagger-typescript-api -p ./docs/openapi.json -r -o ./src/generate --modular -d --extract-request-body --extract-response-body --extract-response-error --axios'",
+    "build": "yarn generate:api && next build"
   },
   "dependencies": {
     "@stomp/stompjs": "^7.0.0",
     "axios": "^1.7.9",
     "d3": "^7.9.0",
+    "dotenv-cli": "^8.0.0",
     "next": "14.2.19",
     "react": "^18",
     "react-dom": "^18",
@@ -30,6 +32,7 @@
     "eslint-config-next": "14.2.19",
     "json-server": "^1.0.0-beta.3",
     "sass": "^1.83.0",
+    "swagger-typescript-api": "^13.0.23",
     "typescript": "^5"
   }
 }

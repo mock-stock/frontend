@@ -8,6 +8,6 @@ export const SW_PATHS = {
 };
 
 export const WS_PATHS = {
-  SUB_ENDPOINT: (stockCode: string) => `/stocks/${stockCode}`, // 메시지를 수신하기 위한 엔드포인트
+  SUB_ENDPOINT: (POINT: string) => `/stocks/${POINT}`, // 메시지를 수신하기 위한 엔드포인트
   PUB_ENDPOINT: "/api/stocks", // 메시지를 전송하기 위한 엔드포인트
 };
