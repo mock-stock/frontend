@@ -1,7 +1,6 @@
 @use "@/styles/sizes";
 .chart-container {
   padding: 10px sizes.$mobile-space-base;
-  // background-color: aqua;
   display: flex;
   justify-content: space-between;
   height: 34px;
@@ -11,7 +10,6 @@
   display: flex;
   width: 100%;
   margin-right: 10px;
-  // background-color: chocolate;
 }
 .chart-type-options {
   width: 34px;
@@ -25,15 +23,16 @@
 }
 
 .option-button {
-  // padding: 0 20px;
   flex-grow: 1;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   background-color: transparent;
+  color: black;
   transition: background-color 0.3s;
 
   &.active {
     background-color: #edf2f7;
+    font-weight: 700;
   }
 }

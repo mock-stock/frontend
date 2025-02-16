@@ -4,4 +4,8 @@
   height: 100vh;
   min-height: 100vh;
   background-color: #fff;
+
+  user-select: none; /* 텍스트 선택 방지 */
+  -webkit-user-select: none; /* iOS, Safari 지원 */
+  -ms-user-select: none; /* Edge 지원 */
 }

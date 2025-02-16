@@ -5,16 +5,11 @@ import {
   calculateChartDimensions,
   calculateYAxisBounds,
 } from "@/lib/utils/chartDataUtils";
-
-interface Chart {
-  close: number[];
-  high: number[];
-  low: number[];
-}
+import { StockHistoryData } from "@/generate/data-contracts";
 
 type LineChartProps = {
   size: WindowSize;
-  chartData: Chart;
+  data: StockHistoryData;
 };
 
 type CircleWithLabelProps = {
@@ -28,8 +23,12 @@ type CircleWithLabelProps = {
 
 export default function StockLine({
   size: { width, height },
-  chartData: { close, high, low },
+  data,
 }: LineChartProps) {
+  const close = data.map((d) => d.stck_clpr);
+  const high = data.map((d) => d.stck_hgpr);
+  const low = data.map((d) => d.stck_lwpr);
+
   const {
     SVG_CHART_WIDTH,
     SVG_CHART_HEIGHT,
@@ -38,7 +37,7 @@ export default function StockLine({
     sidePadding,
     plotWidth,
   } = calculateChartDimensions(width, height, close.length); // 차트 치수
-  const { dataYMax, dataYMin } = calculateYAxisBounds(close, close); //차트 데이터 Y축
+  const { dataYMax, dataYMin } = calculateYAxisBounds(high, low); //차트 데이터 Y축
 
   const highMax = Math.max(...high);
   const lowMin = Math.min(...low);
@@ -48,8 +47,11 @@ export default function StockLine({
     index * barPlotWidth + sidePadding;
 
   // Y축 스케일 계산
+  const marginRatio = 0.3; // 여백 비율 (10%)
+  const domainPadding = (dataYMax - dataYMin) * marginRatio;
+
   const scaleY = scaleLinear()
-    .domain([dataYMin, dataYMax])
+    .domain([dataYMin - domainPadding, dataYMax + domainPadding])
     .range([yAxisLength, 0]);
 
   // 텍스트 밀림 방지
@@ -70,7 +72,11 @@ export default function StockLine({
 
   return (
     <div className={style["chart-container"]}>
-      <svg width={SVG_CHART_WIDTH} height={SVG_CHART_HEIGHT}>
+      <svg
+        className={style.svg}
+        width={SVG_CHART_WIDTH}
+        height={SVG_CHART_HEIGHT}
+      >
         {/* 종가 데이터 라인 */}
         {close.map((cl, index) => {
           const nextValue = close[index + 1];

@@ -64,7 +64,6 @@ export default function TabMenuContentSection({
           <>myInvestments</>
           // <MyInvestmentInfo stockCode={stockCode} />
         )}
-        ㅓ
       </div>
     </section>
   );

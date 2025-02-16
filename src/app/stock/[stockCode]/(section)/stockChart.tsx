@@ -3,7 +3,6 @@ import StockLine from "../../../../components/chart/stockLine";
 import { WindowSize } from "../hooks/useWindowSize";
 import { fetcher } from "@/app/api/api";
 import StockCandle from "../../../../components/chart/stockCandle";
-import { dataToArray } from "@/lib/utils/chartDataUtils";
 import style from "./stockChart.module.scss";
 import { useEffect, useState } from "react";
 import Icons from "@/components/icons";
@@ -33,7 +32,19 @@ export default function StockChart({ size, stockCode }: Props) {
         const response = await fetcher(
           `/api/stock/chart?stck_code=${stockCode}&from_date=${fromDate}&to_date=${toDate}&interval=${interval}`
         );
-        setData(response);
+        let res: StockHistoryData = response;
+
+        if (selectedPeriod === "1주" && res) {
+          //1주 선택시 최신 데이터 7개
+          res = response
+            .sort(
+              (a: { stck_bsop_date: string }, b: { stck_bsop_date: string }) =>
+                a.stck_bsop_date.localeCompare(b.stck_bsop_date)
+            )
+            .slice(-7);
+        }
+
+        setData(sortStockData(res));
       } catch (err: unknown) {
         if (err instanceof Error) {
           setError(`오류가 발생했습니다: ${err.message}`);
@@ -54,21 +65,11 @@ export default function StockChart({ size, stockCode }: Props) {
     getDateRangeAndInterval(period);
   };
 
-  const date = dataToArray(data, "stck_bsop_date");
-  const close = dataToArray(data, "stck_clpr");
-  const open = dataToArray(data, "stck_oprc");
-  const high = dataToArray(data, "stck_hgpr");
-  const low = dataToArray(data, "stck_lwpr");
-  const candle = { date, open, close, high, low };
-  const line = { close, high, low };
-
   return (
     <>
       <div className={style["chart"]}>
-        {chartType === "candle" && (
-          <StockCandle size={size} chartData={candle} />
-        )}
-        {chartType === "line" && <StockLine size={size} chartData={line} />}
+        {chartType === "candle" && <StockCandle size={size} data={data} />}
+        {chartType === "line" && <StockLine size={size} data={data} />}
         {/* <p>{selectedPeriod} 차트가 표시됩니다.</p> */}
       </div>
       <div className={style["chart-container"]}>
@@ -111,7 +112,7 @@ const getDateRangeAndInterval = (
       break;
     case "1주":
       fromDate = new Date(today);
-      fromDate.setDate(today.getDate() - 7);
+      fromDate.setDate(today.getDate() - 21);
       interval = "D";
       break;
     case "한달":
@@ -147,4 +148,26 @@ const getDateRangeAndInterval = (
     toDate: formatDate(today),
     interval,
   };
+};
+
+const sortStockData = (data: StockHistoryData) => {
+  return data.sort((a, b) => {
+    //오름차순 정렬
+    const dateComparison = a.stck_bsop_date.localeCompare(b.stck_bsop_date);
+    if (dateComparison !== 0) return dateComparison;
+
+    if (a.stck_cntg_hour === null && b.stck_cntg_hour !== null) return 1;
+    if (a.stck_cntg_hour !== null && b.stck_cntg_hour === null) return -1;
+
+    if (
+      a.stck_cntg_hour &&
+      a.stck_cntg_hour !== null &&
+      b.stck_cntg_hour &&
+      b.stck_cntg_hour !== null
+    ) {
+      return a.stck_cntg_hour.localeCompare(b.stck_cntg_hour);
+    }
+
+    return 0;
+  });
 };

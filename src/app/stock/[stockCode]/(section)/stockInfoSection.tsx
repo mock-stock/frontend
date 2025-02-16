@@ -1,4 +1,3 @@
-// import Icons from "@/components/icons";
 import {
   formatNumberToKoreanLocale,
   formatNumberWithSign,
@@ -6,7 +5,7 @@ import {
 
 import style from "./stockInfoSection.module.scss";
 import { StockDetailData } from "@/generate/data-contracts";
-// import { StockDetailData } from "../type";
+import { getPriceColor } from "@/lib/utils/priceUtils";
 
 export default function StockInfoSection({ data }: { data: StockDetailData }) {
   if (!data) return;
@@ -19,7 +18,9 @@ export default function StockInfoSection({ data }: { data: StockDetailData }) {
       </div>
       <p className={style["stock-details"]}>
         {formatNumberToKoreanLocale(data.stck_cur_price)}
-        <span>
+        <span
+          className={style[`${getPriceColor(data.stck_prev_cls_diff_price)}`]}
+        >
           {formatNumberWithSign(data.stck_prev_cls_diff_percent)}% (
           {formatNumberToKoreanLocale(data.stck_prev_cls_diff_price)})
         </span>

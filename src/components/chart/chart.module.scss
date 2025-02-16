@@ -1,21 +1,14 @@
-@use "@/styles/sizes";
-$red: #ff3b3c;
-$blue: #3180f2;
-$stroke: #cfd6dd;
-$transparent-red: rgba(255, 59, 60, 0.5);
-$transparent-blue: rgba(49, 128, 242, 0.5);
+@import "@/styles/colors";
 
-.chart-container {
-  padding-top: 20px;
-}
+// .chart-container {
+// background-color: antiquewhite;
+// padding-top: 20px;
+// }
 /* 캔들 - svg */
 .svg {
   cursor: pointer;
-}
-/* 캔들 스타일 - 봉 */
-.candle {
-  rx: 2;
-  ry: 2;
+  // background-color: aliceblue;
+  // padding: 10% 0;
 }
 /* 캔들 스타일 - 라인*/
 .candle-line {
@@ -27,19 +20,48 @@ $transparent-blue: rgba(49, 128, 242, 0.5);
   background: white;
   border: 1px solid gray;
   border-radius: 5px;
-  padding: 5px;
-  font-size: 12px;
+  padding: 10px;
+
   pointer-events: none;
-  display: "flex";
-  flex-direction: "column";
+  display: flex;
+  flex-direction: column;
 }
 
-.candle-blue {
-  fill: $blue;
+.tooltipList {
+  list-style: none;
+  background-color: #fff;
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 0;
+    font-size: 12px;
+
+    > span {
+      font-size: 12px;
+    }
+  }
+  .tooltip-title {
+    margin-bottom: 4px;
+  }
+  .label {
+    color: #9b9da0;
+    font-weight: 300;
+  }
 }
 
-.candle-red {
-  fill: $red;
+.positive {
+  fill: $positive-up;
+  color: $positive-up;
+}
+
+.negative {
+  fill: $negative-down;
+  color: $negative-down;
+}
+.neutral {
+  fill: $neutral-gray;
+  color: $neutral-gray;
 }
 
 // 라인
@@ -49,11 +71,11 @@ $transparent-blue: rgba(49, 128, 242, 0.5);
 }
 
 .line-red {
-  stroke: $red; // 빨간색 선
+  stroke: $negative-down; // 빨간색 선
 }
 
 .line-blue {
-  stroke: $blue; // 파란색 선
+  stroke: $positive-up; // 파란색 선
 }
 
 .transparent-red {

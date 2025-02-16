@@ -1,4 +1,5 @@
 @use "@/styles/sizes";
+@import "@/styles/colors";
 
 .stockInfo-container {
   padding: 20px sizes.$mobile-space-base;
@@ -18,6 +19,15 @@
   text-align: left;
   span {
     margin-left: 10px;
-    color: #3180f2;
   }
+}
+
+.positive {
+  color: $positive-up;
+}
+.negative {
+  color: $negative-down;
+}
+.neutral {
+  color: $neutral-gray;
 }
