@@ -1,4 +1,5 @@
 "use client";
+import { refreshAccessToken } from "@/lib/utils/authUtils";
 import axios from "axios";
 import { useEffect } from "react";
 
@@ -25,14 +26,17 @@ async function loginRequest(email: string, password: string) {
     return null;
   }
 }
-
 export default function TestPage() {
   useEffect(() => {
     const email = "testuser@example.com";
     const password = "test";
 
     const loginProcess = async () => {
-      await loginRequest(email, password);
+      const accessToken = await loginRequest(email, password);
+
+      if (accessToken) {
+        await refreshAccessToken(accessToken);
+      }
     };
 
     loginProcess();
