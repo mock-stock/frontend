@@ -1,7 +1,7 @@
 "use client";
 import { refreshAccessToken } from "@/lib/utils/authUtils";
 import axios from "axios";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 // 로그인 요청 함수
@@ -27,7 +27,8 @@ async function loginRequest(email: string, password: string) {
     return null;
   }
 }
-export default function TestPage() {
+
+function LoginProcess() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirectParam = searchParams.get("redirect");
@@ -51,5 +52,13 @@ export default function TestPage() {
     loginProcess();
   }, [redirectUrl, router]);
 
-  return <></>;
+  return null;
+}
+
+export default function TestPage() {
+  return (
+    <Suspense fallback={<p>로그인 중...</p>}>
+      <LoginProcess />
+    </Suspense>
+  );
 }
