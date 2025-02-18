@@ -2,6 +2,7 @@
 import { refreshAccessToken } from "@/lib/utils/authUtils";
 import axios from "axios";
 import { useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 // 로그인 요청 함수
 async function loginRequest(email: string, password: string) {
@@ -27,6 +28,11 @@ async function loginRequest(email: string, password: string) {
   }
 }
 export default function TestPage() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectParam = searchParams.get("redirect");
+  const redirectUrl = redirectParam ? decodeURIComponent(redirectParam) : "/";
+
   useEffect(() => {
     const email = "testuser@example.com";
     const password = "test";
@@ -35,12 +41,15 @@ export default function TestPage() {
       const accessToken = await loginRequest(email, password);
 
       if (accessToken) {
-        await refreshAccessToken(accessToken);
+        const isLoginSuccess = await refreshAccessToken(accessToken);
+        if (isLoginSuccess) {
+          router.replace(redirectUrl);
+        }
       }
     };
 
     loginProcess();
-  }, []);
+  }, [redirectUrl, router]);
 
   return <></>;
 }
