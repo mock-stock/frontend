@@ -9,10 +9,7 @@ async function loginRequest(email: string, password: string) {
   try {
     const response = await axios.post(
       `${process.env.NEXT_PUBLIC_API_URL}/auth/test`,
-      { email, password },
-      {
-        withCredentials: true,
-      }
+      { email, password }
     );
 
     if (response.data?.accessToken) {

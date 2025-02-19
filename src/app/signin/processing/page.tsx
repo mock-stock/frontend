@@ -21,13 +21,22 @@ const FetchDataComponent = () => {
       }
 
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/auth/sendToken`,
+        `${process.env.NEXT_PUBLIC_API_URL}/auth/login/kakao`,
         {
-          accessToken: token,
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
         }
       );
 
-      if (response.data.success) {
+      if (response.data) {
+        console.log("로그인 성공!");
+
+        // 새로운 accessToken 로컬 스토리지에 저장
+        const newAccessToken = response.data.accessToken;
+        localStorage.setItem("accessToken", newAccessToken);
+
         router.push(redirectUrl);
       } else {
         setErrorMessage(response.data.message || "인증 실패");
@@ -37,7 +46,7 @@ const FetchDataComponent = () => {
     };
 
     fetchData();
-  }, [token, redirectUrl]);
+  }, [token, redirectUrl, router]);
 
   if (loading) {
     return <p>로그인 처리 중...</p>;
