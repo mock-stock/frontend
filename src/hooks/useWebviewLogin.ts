@@ -35,7 +35,7 @@ export function useWebviewLogin({ onLoginSuccess }: UseWebviewLoginProps) {
       window.removeEventListener("message", handleMessage);
       document.removeEventListener("message", handleMessage);
     };
-  }, [onLoginSuccess]);
+  }, []);
 
   return sendLoginRequest;
 }
