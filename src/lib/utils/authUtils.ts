@@ -22,7 +22,7 @@ export async function refreshAccessToken(accessToken: string) {
     );
 
     if (refreshResponse.data && refreshResponse.status === 200) {
-      console.log("로그인 성공!");
+      console.log("로그인 갱신 완료!");
 
       // 새로운 accessToken 로컬 스토리지에 저장
       const newAccessToken = refreshResponse.data.accessToken;
