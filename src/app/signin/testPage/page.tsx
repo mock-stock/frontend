@@ -14,14 +14,14 @@ async function loginRequest(email: string, password: string) {
 
     if (response.data?.accessToken) {
       localStorage.setItem("accessToken", response.data.accessToken);
-      return response.data.accessToken;
+      return true;
     } else {
       console.error("엑세스 토큰을 받지 못했습니다.");
-      return null;
+      return false;
     }
   } catch (error) {
     console.error("로그인 요청 중 오류 발생:", error);
-    return null;
+    return false;
   }
 }
 
@@ -36,8 +36,11 @@ function LoginProcess() {
     const password = "test";
 
     const loginProcess = async () => {
-      await loginRequest(email, password);
-
+      const isLoginSuccess = await loginRequest(email, password);
+      if (isLoginSuccess) {
+        alert("로그인 성공");
+        router.replace(redirectUrl);
+      }
       // if (accessToken) {
       //   const isLoginSuccess = await refreshAccessToken(accessToken);
       //   if (isLoginSuccess) {
