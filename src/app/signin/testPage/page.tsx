@@ -1,5 +1,5 @@
 "use client";
-import { refreshAccessToken } from "@/lib/utils/authUtils";
+// import { refreshAccessToken } from "@/lib/utils/authUtils";
 import axios from "axios";
 import { Suspense, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -36,14 +36,14 @@ function LoginProcess() {
     const password = "test";
 
     const loginProcess = async () => {
-      const accessToken = await loginRequest(email, password);
+      await loginRequest(email, password);
 
-      if (accessToken) {
-        const isLoginSuccess = await refreshAccessToken(accessToken);
-        if (isLoginSuccess) {
-          router.replace(redirectUrl);
-        }
-      }
+      // if (accessToken) {
+      //   const isLoginSuccess = await refreshAccessToken(accessToken);
+      //   if (isLoginSuccess) {
+      //     router.replace(redirectUrl);
+      //   }
+      // }
     };
 
     loginProcess();
