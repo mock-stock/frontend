@@ -11,16 +11,12 @@ async function loginRequest(email: string, password: string) {
       `${process.env.NEXT_PUBLIC_API_URL}/auth/test`,
       { email, password }
     );
-
-    if (response.data?.accessToken) {
+    if (response.status === 200 && response.data?.accessToken) {
       localStorage.setItem("accessToken", response.data.accessToken);
       return true;
-    } else {
-      console.error("엑세스 토큰을 받지 못했습니다.");
-      return false;
     }
   } catch (error) {
-    console.error("로그인 요청 중 오류 발생:", error);
+    console.error("오류 발생", error);
     return false;
   }
 }

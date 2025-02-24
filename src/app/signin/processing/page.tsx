@@ -20,29 +20,28 @@ const FetchDataComponent = () => {
         return;
       }
 
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/auth/login/kakao`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
+      try {
+        const response = await axios.post(
+          `${process.env.NEXT_PUBLIC_API_URL}/auth/login/kakao`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        if (response.data?.accessToken && response.status === 200) {
+          console.log("로그인 성공!");
+          localStorage.setItem("accessToken", response.data.accessToken);
+          router.push(redirectUrl);
         }
-      );
-
-      if (response.data) {
-        console.log("로그인 성공!");
-
-        // 새로운 accessToken 로컬 스토리지에 저장
-        const newAccessToken = response.data.accessToken;
-        localStorage.setItem("accessToken", newAccessToken);
-
-        router.push(redirectUrl);
-      } else {
-        setErrorMessage(response.data.message || "인증 실패");
+      } catch (error) {
+        console.error(error);
+        setErrorMessage("오류 발생");
+      } finally {
+        setLoading(false);
       }
-
-      setLoading(false);
     };
 
     fetchData();

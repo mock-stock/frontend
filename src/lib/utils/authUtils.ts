@@ -20,7 +20,6 @@ export async function refreshAccessToken(accessToken: string) {
         },
       }
     );
-
     if (refreshResponse.data && refreshResponse.status === 200) {
       console.log("토큰 갱신 완료!");
 
@@ -29,12 +28,9 @@ export async function refreshAccessToken(accessToken: string) {
       localStorage.setItem("accessToken", newAccessToken);
 
       return true;
-    } else {
-      console.log("토큰 갱신 실패!");
-      return false;
     }
   } catch (error) {
-    console.error("Refresh 요청 중 오류 발생:", error);
+    console.error("오류 발생", error);
     return false;
   }
 }
