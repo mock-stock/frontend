@@ -1,6 +1,6 @@
 import Icons from "@/components/icons";
-import Link from "next/link";
 import style from "./mypaySection.module.scss";
+import { LoginButton } from "@/components/button/loginButton";
 
 export default function MypaySection() {
   return (
@@ -13,9 +13,7 @@ export default function MypaySection() {
       </h2>
       <div className={style["pay-box"]}>
         <p className={style.pay}>0 원</p>
-        <Link href="/signin" legacyBehavior>
-          <a className={style.btn}>로그인</a>
-        </Link>
+        <LoginButton size="medium" />
       </div>
     </section>
   );
