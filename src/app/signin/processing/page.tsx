@@ -1,7 +1,9 @@
 "use client";
+import Icons from "@/components/icons";
 import axios from "axios";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState, Suspense } from "react";
+import { toast } from "react-hot-toast";
 
 const FetchDataComponent = () => {
   const searchParams = useSearchParams();
@@ -32,13 +34,20 @@ const FetchDataComponent = () => {
           }
         );
         if (response.data?.accessToken && response.status === 200) {
-          console.log("로그인 성공!");
           localStorage.setItem("accessToken", response.data.accessToken);
-          router.push(redirectUrl);
+          toast.success("로그인 완료.", {
+            icon: <Icons kind={"successIcon"} />,
+          });
+          router.replace(redirectUrl);
         }
       } catch (error) {
-        console.error(error);
-        setErrorMessage("오류 발생");
+        if (axios.isAxiosError(error)) {
+          if (error.response?.status === 401) {
+            alert("예기치 못한 문제가 발생했습니다. 다시 시도해주세요.");
+            setErrorMessage("오류 발생");
+            router.replace(redirectUrl);
+          }
+        }
       } finally {
         setLoading(false);
       }

@@ -1,8 +1,9 @@
 "use client";
-// import { refreshAccessToken } from "@/lib/utils/authUtils";
 import axios from "axios";
 import { Suspense, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { toast } from "react-hot-toast";
+import Icons from "@/components/icons";
 
 // 로그인 요청 함수
 async function loginRequest(email: string, password: string) {
@@ -34,15 +35,14 @@ function LoginProcess() {
     const loginProcess = async () => {
       const isLoginSuccess = await loginRequest(email, password);
       if (isLoginSuccess) {
-        alert("로그인 성공");
+        toast.success("로그인 완료.", {
+          icon: <Icons kind={"successIcon"} />,
+        });
+        router.replace(redirectUrl);
+      } else {
+        alert("로그인 실패. 다시 시도해주세요.");
         router.replace(redirectUrl);
       }
-      // if (accessToken) {
-      //   const isLoginSuccess = await refreshAccessToken(accessToken);
-      //   if (isLoginSuccess) {
-      //     router.replace(redirectUrl);
-      //   }
-      // }
     };
 
     loginProcess();
