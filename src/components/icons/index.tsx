@@ -10,6 +10,7 @@ import {
   ChartCandle,
 } from "./icons";
 import { Empty } from "./empty";
+import { SuccessIcon, ErrorIcon, WarningIcon } from "./toast";
 import Kakao from "./social";
 
 const components = {
@@ -23,6 +24,9 @@ const components = {
   chartCandle: ChartCandle,
   empty: Empty,
   kakao: Kakao,
+  successIcon: SuccessIcon,
+  errorIcon: ErrorIcon,
+  warningIcon: WarningIcon,
 };
 
 type IconProps = {
