@@ -1,5 +1,5 @@
-"use client";
-import { useCallback, useEffect } from "react";
+'use client';
+import { useCallback, useEffect } from 'react';
 
 interface UseWebviewLoginProps {
   onLoginSuccess?: (accessToken: string) => void;
@@ -10,7 +10,7 @@ export function useWebviewLogin({ onLoginSuccess }: UseWebviewLoginProps) {
   const sendLoginRequest = useCallback(() => {
     if (window.ReactNativeWebView) {
       window.ReactNativeWebView.postMessage(
-        JSON.stringify({ action: "LOGIN" })
+        JSON.stringify({ action: 'LOGIN' })
       );
     }
   }, []);
@@ -20,20 +20,20 @@ export function useWebviewLogin({ onLoginSuccess }: UseWebviewLoginProps) {
     const handleMessage = (event: MessageEvent) => {
       try {
         const data = JSON.parse(event.data);
-        if (data.action === "LOGIN_SUCCESS") {
+        if (data.action === 'KAKAO_LOGIN_SUCCESS') {
           onLoginSuccess?.(data.kakaoAccessToken);
         }
       } catch (error) {
-        console.error("Failed to parse message:", error);
+        console.error('Failed to parse message:', error);
       }
     };
 
-    window.addEventListener("message", handleMessage);
-    document.addEventListener("message", handleMessage);
+    window.addEventListener('message', handleMessage);
+    document.addEventListener('message', handleMessage);
 
     return () => {
-      window.removeEventListener("message", handleMessage);
-      document.removeEventListener("message", handleMessage);
+      window.removeEventListener('message', handleMessage);
+      document.removeEventListener('message', handleMessage);
     };
   }, []);
 
