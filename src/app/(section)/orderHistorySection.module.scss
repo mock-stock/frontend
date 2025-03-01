@@ -1,0 +1,12 @@
+@use "@/styles/sizes";
+
+//주문내역 (OrderHistorySection)
+.orderHistory-container {
+  background-color: #fff;
+  padding: sizes.$mobile-space-base;
+  margin-bottom: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

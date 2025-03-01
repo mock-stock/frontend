@@ -1,0 +1,33 @@
+@use "@/styles/sizes";
+@import "@/styles/colors";
+
+.stockInfo-container {
+  padding: 20px sizes.$mobile-space-base;
+  background-color: #fff;
+}
+
+.stock-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+.info-title {
+  font-weight: 500;
+  font-size: 1.25rem;
+}
+.stock-details {
+  text-align: left;
+  span {
+    margin-left: 10px;
+  }
+}
+
+.positive {
+  color: $positive-up;
+}
+.negative {
+  color: $negative-down;
+}
+.neutral {
+  color: $neutral-gray;
+}

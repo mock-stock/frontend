@@ -1,0 +1,32 @@
+@use "@/styles/sizes";
+
+// 마이페이 (MypaySection)
+.mypay-container {
+  background-color: #fff;
+  padding: sizes.$mobile-space-base;
+  margin-bottom: 10px;
+}
+.title-box {
+  display: flex;
+  align-items: center;
+  .title {
+    padding-left: 4px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    > span {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: #477eea;
+    }
+  }
+}
+
+.pay-box {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.pay {
+  font-size: 1.25rem;
+}

@@ -1,0 +1,87 @@
+@import "@/styles/colors";
+
+// .chart-container {
+// background-color: antiquewhite;
+// padding-top: 20px;
+// }
+/* 캔들 - svg */
+.svg {
+  cursor: pointer;
+  // background-color: aliceblue;
+  // padding: 10% 0;
+}
+/* 캔들 스타일 - 라인*/
+.candle-line {
+  stroke: $stroke;
+  stroke-width: 1;
+}
+/* 캔들 - 툴팁 스타일 */
+.tooltip {
+  background: white;
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 10px;
+
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.tooltipList {
+  list-style: none;
+  background-color: #fff;
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 0;
+    font-size: 12px;
+
+    > span {
+      font-size: 12px;
+    }
+  }
+  .tooltip-title {
+    margin-bottom: 4px;
+  }
+  .label {
+    color: #9b9da0;
+    font-weight: 300;
+  }
+}
+
+.positive {
+  fill: $positive-up;
+  color: $positive-up;
+}
+
+.negative {
+  fill: $negative-down;
+  color: $negative-down;
+}
+.neutral {
+  fill: $neutral-gray;
+  color: $neutral-gray;
+}
+
+// 라인
+.line {
+  stroke-width: 3px;
+  stroke-linecap: "round";
+}
+
+.line-red {
+  stroke: $negative-down; // 빨간색 선
+}
+
+.line-blue {
+  stroke: $positive-up; // 파란색 선
+}
+
+.transparent-red {
+  fill: $transparent-red;
+}
+
+.transparent-blue {
+  fill: $transparent-blue;
+}

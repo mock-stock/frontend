@@ -1,0 +1,50 @@
+@use "@/styles/sizes";
+
+$content_sixe: 40px;
+
+.header-container {
+  height: 48px;
+  padding: 0 sizes.$mobile-space-base;
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.back-icon-box {
+  width: $content_sixe;
+  height: $content_sixe;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #edf2f7;
+  border-radius: 10px;
+}
+
+.input-wrapper {
+  height: $content_sixe;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  background-color: #edf2f7;
+  padding: 0 10px;
+  margin-left: 12px;
+}
+.search-icon-box {
+  width: sizes.$icon_sixe;
+  height: sizes.$icon_sixe;
+}
+.search-input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  padding-left: 12px;
+
+  &::placeholder {
+    color: #9b9da0;
+  }
+}

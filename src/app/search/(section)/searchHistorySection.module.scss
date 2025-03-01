@@ -1,0 +1,38 @@
+@use "@/styles/sizes";
+
+.historyList-container {
+  padding: 20px sizes.$mobile-space-base;
+  background-color: #fff;
+  min-height: 100vh;
+  height: 100vh;
+}
+
+.historyList-wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+}
+.title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.history-item {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.item-content {
+  display: flex;
+  align-items: center;
+  background-color: #edf2f7;
+  padding: 8px;
+  border-radius: 10px;
+}
+
+.item-title {
+  margin-right: 10px;
+  height: 24px;
+  font-size: 16px;
+  line-height: 27px;
+}
