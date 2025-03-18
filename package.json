@@ -8,7 +8,7 @@
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
     "start": "next start",
     "lint": "next lint",
-    "generate:api": "mkdir -p ./docs && mkdir -p src/generate && dotenv -e .env -- sh -c 'curl -X GET \"$SWAGGER_API_URL\" -o ./docs/openapi.json && swagger-typescript-api -p ./docs/openapi.json -r -o ./src/generate --modular -d --extract-request-body --extract-response-body --extract-response-error --axios'",
+    "generate:api": "mkdir -p ./docs && mkdir -p src/generate && dotenv -e .env -- sh -c 'curl -X GET https://mock-stock.store/v3/api-docs -o ./docs/openapi.json && swagger-typescript-api -p ./docs/openapi.json -r -o ./src/generate --modular -d --extract-request-body --extract-response-body --extract-response-error --axios'",
     "build": "yarn generate:api && next build"
   },
   "dependencies": {
