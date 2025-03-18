@@ -12,7 +12,7 @@ export default function Home() {
   const [accountData, setAccountData] = useState<GetAccountData>();
   async function getAccountData() {
     const { data }: { data: GetAccountData } = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_UR}/account`,
+      `${process.env.NEXT_PUBLIC_API_URL}/account`,
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,

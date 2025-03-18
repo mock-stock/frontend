@@ -29,7 +29,7 @@ function LoginProcess() {
   const redirectUrl = redirectParam ? decodeURIComponent(redirectParam) : "/";
 
   useEffect(() => {
-    const email = "testuser@example.com";
+    const email = "testuser2@example.com";
     const password = "test";
 
     const loginProcess = async () => {
