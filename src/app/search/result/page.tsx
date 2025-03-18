@@ -7,13 +7,12 @@ interface SearchParamProps {
   };
 }
 export default function Page({ searchParams }: SearchParamProps) {
-  const params = searchParams.search_query;
-
+  const searechQuery = searchParams.search_query;
   return (
     <div className={style["page-container"]}>
       <SearchHeader />
       <main>
-        <SearchResultSection params={params} />
+        <SearchResultSection searechQuery={searechQuery} />
       </main>
     </div>
   );

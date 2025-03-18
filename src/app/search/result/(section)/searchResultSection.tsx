@@ -1,20 +1,25 @@
-import { Stocks } from "@/generate/Stocks";
 import style from "./searchResultSection.module.scss";
 // import ResultStockList from "../resultStockList";
 import Link from "next/link";
+import axios from "axios";
+import { SearchStocksData } from "@/generate/data-contracts";
 
 export default async function SearchResultSection({
-  params,
+  searechQuery,
 }: {
-  params: string;
+  searechQuery: string;
 }) {
-  const stockApi = new Stocks();
-  const { data } = await stockApi.searchStocks(params);
+  // const stockApi = new Stocks();
+  const { data }: { data: SearchStocksData } = await axios.get(
+    `${process.env.NEXT_PUBLIC_API_UR}/stocks/search/${searechQuery}`
+  );
+
+  // const { data } = await stockApi.searchStocks(searechQuery);
 
   if (!data || data.length === 0) {
     return (
       <p className={style["no-results"]}>
-        <span>&quot;{params}&quot;</span>에 대한 검색결과가 없어요.
+        <span>&quot;{searechQuery}&quot;</span>에 대한 검색결과가 없어요.
       </p>
     );
   }
