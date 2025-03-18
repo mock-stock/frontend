@@ -11,7 +11,7 @@ export default async function SearchResultSection({
 }) {
   // const stockApi = new Stocks();
   const { data }: { data: SearchStocksData } = await axios.get(
-    `${process.env.NEXT_PUBLIC_API_UR}/stocks/search/${searechQuery}`
+    `${process.env.NEXT_PUBLIC_API_URL}/stocks/search/${searechQuery}`
   );
 
   // const { data } = await stockApi.searchStocks(searechQuery);
