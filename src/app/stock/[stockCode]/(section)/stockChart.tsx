@@ -1,12 +1,12 @@
 "use client";
 import StockLine from "../../../../components/chart/stockLine";
 import { WindowSize } from "../hooks/useWindowSize";
-import { fetcher } from "@/app/api/api";
 import StockCandle from "../../../../components/chart/stockCandle";
 import style from "./stockChart.module.scss";
 import { useEffect, useState } from "react";
 import Icons from "@/components/icons";
 import { StockHistoryData } from "@/generate/data-contracts";
+import axios from "axios";
 
 type SelectionType = "1일" | "1주" | "한달" | "3개월" | "1년" | "5년";
 
@@ -29,14 +29,14 @@ export default function StockChart({ size, stockCode }: Props) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetcher(
-          `/api/stock/chart?stck_code=${stockCode}&from_date=${fromDate}&to_date=${toDate}&interval=${interval}`
+        const { data }: { data: StockHistoryData } = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/stock/history/${stockCode}?from_date=${fromDate}&to_date=${toDate}&interval=${interval}`
         );
-        let res: StockHistoryData = response;
+        let res: StockHistoryData = data;
 
-        if (selectedPeriod === "1주" && res) {
+        if (selectedPeriod === "1주" && data) {
           //1주 선택시 최신 데이터 7개
-          res = response
+          res = data
             .sort(
               (a: { stck_bsop_date: string }, b: { stck_bsop_date: string }) =>
                 a.stck_bsop_date.localeCompare(b.stck_bsop_date)
@@ -88,9 +88,9 @@ export default function StockChart({ size, stockCode }: Props) {
         </div>
         <div className={style["chart-type-options"]}>
           {chartType === "candle" ? (
-            <Icons kind="chartLine" onClick={() => setChartType("line")} />
+            <Icons kind='chartLine' onClick={() => setChartType("line")} />
           ) : (
-            <Icons kind="chartCandle" onClick={() => setChartType("candle")} />
+            <Icons kind='chartCandle' onClick={() => setChartType("candle")} />
           )}
         </div>
       </div>

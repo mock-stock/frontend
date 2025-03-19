@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { connectSocket } from "@/lib/stompClient";
+import { stompWebSocket } from "@/lib/stompClient";
 import { WS_PATHS } from "@/lib/utils/paths";
 import { StockDetailData } from "@/generate/data-contracts";
 import axios from "axios";
@@ -27,7 +27,7 @@ export const useStocksInfoSocket = (stockCode: string) => {
     fetchData();
 
     // 소켓 연결
-    const { unsubscribe } = connectSocket(
+    const { unsubscribe } = stompWebSocket(
       [stockCode],
       WS_PATHS.PUB_ENDPOINT,
       (data: StockDetailData) => {
