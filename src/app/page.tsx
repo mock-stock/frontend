@@ -29,7 +29,6 @@ export default function Home() {
       typeof window !== "undefined" &&
       localStorage.getItem("accessToken") !== null
     ) {
-      alert("here window is available");
       getAccountData();
     }
   }, []);
