@@ -10,7 +10,8 @@ async function loginRequest(email: string, password: string) {
   try {
     const response = await axios.post(
       `${process.env.NEXT_PUBLIC_API_URL}/auth/test`,
-      { email, password }
+      { email, password },
+      { withCredentials: true }
     );
     if (response.status === 200 && response.data?.accessToken) {
       localStorage.setItem("accessToken", response.data.accessToken);

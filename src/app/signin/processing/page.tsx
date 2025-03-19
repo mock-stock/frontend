@@ -30,6 +30,7 @@ const FetchDataComponent = () => {
               Authorization: `Bearer ${socialToken}`,
               "Content-Type": "application/json",
             },
+            withCredentials: true,
           }
         );
         alert(response.data);
