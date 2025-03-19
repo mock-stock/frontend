@@ -9,13 +9,12 @@ import { StockDetailData, StockInfoDto } from "@/generate/data-contracts";
 //   stock_ids?: string[];
 // }
 let stompClient: Client;
-export const connectSocket = (
+export const stompWebSocket = (
   ids: string[],
   PUB_ENDPOINT: string,
   onMessageReceived: (data: StockDetailData) => void
 ) => {
   const subscriptionInfos: StompSubscription[] = [];
-
   // 구독 취소
   const unsubscribe = () => {
     if (subscriptionInfos.length > 0) {
