@@ -1,19 +1,21 @@
 import { useEffect, useState } from "react";
 import { connectSocket } from "@/lib/stompClient";
 import { WS_PATHS } from "@/lib/utils/paths";
-import { fetcher } from "@/app/api/api";
 import { StockDetailData } from "@/generate/data-contracts";
+import axios from "axios";
 
-export const useStocksInfoSocket = (apiPath: string, POINT: string) => {
+export const useStocksInfoSocket = (stockCode: string) => {
   const [data, setData] = useState<StockDetailData | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!apiPath) return;
     const fetchData = async () => {
       try {
-        const response = await fetcher(apiPath);
-        setData(response);
+        const { data } = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/stock/${stockCode}`
+        );
+
+        setData(data);
       } catch (err: unknown) {
         if (err instanceof Error) {
           setError(`오류가 발생했습니다: ${err.message}`);
@@ -26,9 +28,8 @@ export const useStocksInfoSocket = (apiPath: string, POINT: string) => {
 
     // 소켓 연결
     const { unsubscribe } = connectSocket(
-      WS_PATHS.SUB_ENDPOINT(POINT),
+      [stockCode],
       WS_PATHS.PUB_ENDPOINT,
-      { action: "SUBSCRIBE", ids: [POINT] },
       (data: StockDetailData) => {
         setData(data);
       }
@@ -38,7 +39,7 @@ export const useStocksInfoSocket = (apiPath: string, POINT: string) => {
       // 구독 취소
       unsubscribe();
     };
-  }, [apiPath, POINT]);
+  }, [stockCode]);
 
   return { data, error };
 };
