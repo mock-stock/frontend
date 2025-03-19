@@ -19,10 +19,7 @@ interface StockParamProps {
 }
 
 export default function Page({ params, searchParams }: StockParamProps) {
-  const { data, error } = useStocksInfoSocket(
-    `/api/stock/info?code=${params.stockCode}`,
-    params.stockCode
-  );
+  const { data, error } = useStocksInfoSocket(params.stockCode);
 
   const [activeTab, setActiveTab] = useState<TabType>("chart");
 
