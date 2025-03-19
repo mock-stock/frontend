@@ -39,15 +39,8 @@ const FetchDataComponent = () => {
         });
         router.replace(redirectUrl);
       } catch (error) {
-        if (axios.isAxiosError(error)) {
-          if (error.response?.status === 401) {
-            alert("토큰에러");
-            router.replace(redirectUrl);
-          }
-        } else {
-          alert("예기치 못한 문제가 발생했습니다. 다시 시도해주세요.");
-          router.replace(redirectUrl);
-        }
+        alert(error);
+        router.replace(redirectUrl);
       } finally {
         setLoading(false);
       }
