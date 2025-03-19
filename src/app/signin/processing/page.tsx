@@ -40,6 +40,7 @@ const FetchDataComponent = () => {
         router.replace(redirectUrl);
       } catch (error) {
         alert(error);
+        console.error(error);
         router.replace(redirectUrl);
       } finally {
         setLoading(false);
@@ -50,7 +51,7 @@ const FetchDataComponent = () => {
   }, []);
 
   if (loading) {
-    return <p>로그인 처리 중...</p>;
+    return <p>로그인 처리 중..</p>;
   }
 };
 
