@@ -51,7 +51,7 @@ const FetchDataComponent = () => {
   }, []);
 
   if (loading) {
-    return <p>로그인 처리 중...</p>;
+    return <p>로그인 처리 중..</p>;
   }
 };
 
