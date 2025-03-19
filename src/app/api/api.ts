@@ -9,4 +9,4 @@ const api = axios.create({
 
 export default api;
 
-export const fetcher = (url: string) => axios.get(url).then((res) => res.data);
+// export const fetcher = (url: string) => axios.get(url).then((res) => res.data);
