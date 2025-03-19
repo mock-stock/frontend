@@ -58,7 +58,7 @@ export const stompWebSocket = (
   }
   stompClient = new Client({
     webSocketFactory: () => new SockJS(SOCKET_URL),
-    reconnectDelay: 5000, // 연결이 끊어졌을 때 5초 후에 재연결 시도
+    // reconnectDelay: 5000, // 연결이 끊어졌을 때 5초 후에 재연결 시도
     heartbeatIncoming: 10000, // 서버로부터 10초마다 하트비트 수신
     heartbeatOutgoing: 10000, // 클라이언트가 서버에 10초마다 하트비트 전송
 
