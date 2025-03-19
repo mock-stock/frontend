@@ -16,10 +16,10 @@ export function LoginButton({ size = "medium" }: LoginButtonProps) {
   //   router.push(`signin/testPage?&redirect=${redirectUrl}`);
   // };
 
-  const handleLoginSuccess = (accessToken: string) => {
+  const handleLoginSuccess = (socialToken: string) => {
     const redirectUrl = encodeURIComponent(pathname);
     router.push(
-      `signin/processing?token=${accessToken}&redirect=${redirectUrl}`
+      `signin/processing?socialToken=${socialToken}&redirect=${redirectUrl}`
     );
   };
 

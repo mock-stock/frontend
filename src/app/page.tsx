@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   const [accountData, setAccountData] = useState<GetAccountData>();
+
   async function getAccountData() {
     const { data }: { data: GetAccountData } = await axios.get(
       `${process.env.NEXT_PUBLIC_API_URL}/account`,
@@ -22,8 +23,13 @@ export default function Home() {
 
     setAccountData(data);
   }
+
   useEffect(() => {
-    if (localStorage.getItem("accessToken") !== null) {
+    if (
+      typeof window !== "undefined" &&
+      localStorage.getItem("accessToken") !== null
+    ) {
+      alert("here window is available");
       getAccountData();
     }
   }, []);
